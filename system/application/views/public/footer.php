@@ -1,7 +1,13 @@
     <div id="footer">
-        <a href="#top"><?php print $this->lang->line('general_top')?></a><br />
-        This site is powered by <a href="http://www.kaydoo.co.uk/projects/backendpro">BackendPro <?php print BEP_VERSION?></a><br />
-        &copy; Copyright 2008 - <a href="http://www.kaydoo.co.uk">Adam Price</a> -  All rights Reserved
+        <?php
+        echo "<p>".$this->preference->item('company_name').", ".$this->preference->item('company_address').", ".
+                $this->preference->item('company_post')." ".$this->preference->item('company_city').
+                ", ".$this->preference->item('company_country')."<span id='phone'>".
+                $this->preference->item('company_telephone')."</span><span id='mobile'>".$this->preference->item('company_mobile')."</span>".
+                $this->preference->item('company_orgainzation_number')."<span id='webcom'>".$this->preference->item('company_other_one')."</span></p>";
+                
+                
+         ?>       
     </div> 
 </div>
 <?php print $this->bep_assets->get_footer_assets();?>

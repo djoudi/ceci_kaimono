@@ -127,6 +127,9 @@ $config['asset'][] = array('file'=>'coin-slider.min.js', 'needs'=>'jquery');
 // jquery.nivo.slider
 $config['asset'][] = array('file'=>'nivo-slider.css');
 $config['asset'][] = array('file'=>'jquery.nivo.slider.pack.js', 'needs'=>'jquery');
+
+// cecilieokada.com
+$config['asset'][] = array('file'=>'cecilie.css');
 // Added upto here
 
 
@@ -142,7 +145,7 @@ $config['asset'][] = array('file'=>'jquery.nivo.slider.pack.js', 'needs'=>'jquer
  * Where <asset_n> is the name of the asset file specified in the array above.
  */
 $config['asset_group']['SITE'] = 'reset|typography';
-$config['asset_group']['PUBLIC'] = 'bep_front_layout|FlashStatus';
+$config['asset_group']['PUBLIC'] = 'FlashStatus|cecilie';
 $config['asset_group']['ADMIN'] = 'bep_admin_layout|bep_admin_style|FlashStatus|forms|buttons|bep_navigation|treeview|bep_icons|bep_select_all';
 
 // Added from here 

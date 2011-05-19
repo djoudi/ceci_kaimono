@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php print $this->bep_site->get_metatags(); ?>
-	<title><?php print $header.' | '.$this->preference->item('site_name')?></title>
+	<title><?php print $title; ?></title>
 	<?php print $this->bep_site->get_variables()?>
 	<?php print $this->bep_assets->get_header_assets();?>
 	<?php print $this->bep_site->get_js_blocks()?>
