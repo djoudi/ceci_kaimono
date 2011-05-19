@@ -1,1 +1,9 @@
+body{
+    background-color: #a4a380;
+}
 
+#wrapper{
+    width:960px;
+    margin: 0 auto;
+    background-color: #fff;
+}
