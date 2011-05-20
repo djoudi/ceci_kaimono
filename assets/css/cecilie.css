@@ -2,11 +2,53 @@ body{
     background-color: #eaeae0;
 }
 
+/**********
+fonts
+*************/
+
+@font-face {
+    font-family: 'CantarellRegular';
+    src: url('webfonts/cantarell-regular-webfont.eot');
+    src: url('webfonts/cantarell-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('webfonts/cantarell-regular-webfont.woff') format('woff'),
+         url('webfonts/cantarell-regular-webfont.ttf') format('truetype'),
+         url('webfonts/cantarell-regular-webfont.svg#CantarellRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'FuturaMedium';
+    src: url('webfonts/futuram-webfont.eot');
+    src: url('webfonts/futuram-webfont.eot?#iefix') format('embedded-opentype'),
+         url('webfonts/futuram-webfont.woff') format('woff'),
+         url('webfonts/futuram-webfont.ttf') format('truetype'),
+         url('webfonts/futuram-webfont.svg#FuturaMedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'FuturaBook';
+    src: url('webfonts/futuran-webfont.eot');
+    src: url('webfonts/futuran-webfont.eot?#iefix') format('embedded-opentype'),
+         url('webfonts/futuran-webfont.woff') format('woff'),
+         url('webfonts/futuran-webfont.ttf') format('truetype'),
+         url('webfonts/futuran-webfont.svg#FuturaBook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
 #wrapper{
     width:960px;
     height: 740px;
     margin: 0 auto;
     background: #fcf8ed url(../images/cecilie/main_bg.png) repeat-y 0 0;
+    position: relative;
 }
 /************
 topnav
@@ -22,13 +64,14 @@ topnav
     text-decoration: none;
     line-height: 47px;
     font-size: 14px;
-    font-family: 'Cantarell', Helvetica, sans-serif;
+    font-family: 'CantarellRegular', Helvetica, sans-serif;
+    text-transform: uppercase; 
 }
 
 #nav li{
     display: inline;
     height: 47px;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 #nav {
@@ -66,6 +109,9 @@ footer
 *****************/
 #footer{
     height: 50px;
+    position: absolute;
+    bottom: -28px;
+    width: 100%;
 }
 
 #footmain{
@@ -75,4 +121,59 @@ footer
     line-height: 28px;
     font-size: 11px;
     padding: 0 0 0 60px;
+}
+
+/******************
+frontpage
+*********************/
+#frontcont{
+    width: 790px;
+    height: 150px;
+    margin: 50px auto 0;
+}
+
+#lima_logo{
+    width: 82px;
+    height: 92px;
+    margin: 0 40px 0 30px;
+    float: left;
+}
+
+#maincont{
+    width: 270px;
+    float: left;
+    
+}
+#maincont h2{
+    font-family: 'FuturaMedium' , Helvetica, sans-serif;
+    font-size: 16px;
+    color: #d50e8b;
+    line-height: 19px;
+    margin: 0;
+}
+
+#maincont h3{
+    font-family: 'FuturaMedium' , Helvetica, sans-serif;
+    font-size: 14px;
+    color: #d50e8b;
+    line-height: 17px;
+    margin: 0;
+}
+#maincont p{
+    font-family: 'FuturaBook' , Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+}
+#secondcol{
+    width: 160px;
+    margin: 0 0 0 10px;
+    float: left;
+}
+
+#collection{
+    float: left;
+    width: 119px;
+    height: 119px;
+    margin: -20px 0 0 20px;
 }

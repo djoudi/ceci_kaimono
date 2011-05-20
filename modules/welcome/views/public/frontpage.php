@@ -31,42 +31,24 @@ echo "</pre>";
         }
         echo "</div>";
     }
-  //  print_r ($slides);
-
-   // print_r ($pagecontent);
-     if(isset($pagecontent['content'])){// this if is for the installation without this it will display an error
-         echo $pagecontent['content'];
-     }
-     ;?>
+    ?>
+    <div id="frontcont">
+        <img id="lima_logo" src="<?php echo base_url()?>assets/images/cecilie/lima_logo.png" />
+    <?php
+    if(isset($pagecontent['content'])){// this if is for the installation without this it will display an error
+        echo "<div id='maincont'>".$pagecontent['content']."</div>";
+    }
+     ?>
+        <div id="secondcol">
+            <p>second language</p>
+        
+        </div>
+        
+        <img id="collection" src="<?php echo base_url()?>assets/images/cecilie/collection.png" />
+        
+        </div>
 </div>
-<div id="frontproducttable">
 
-<?php
-/*
-foreach ($images as $image)
-{
-    $imageinfo = $image['thumbnail'];
-    $thumbnail=convert_image_path($imageinfo);
 
-        echo '<div class="vt ac" >'."\n".'<div class="frontpro">'."\n".'<div class="vt">'."\n";
-        echo '<a href="' . site_url().'/'.$module. '/product/'.$image['id']. '">';
-        echo "<img src='".$thumbnail."' border='0' class='thumbnail'/></a>\n</div>\n<div class='vt al'>\n";
-        echo '<span class="hdrproduct"><a href="' . site_url(). '/'.$module.'/product/'.$image['id']. '">'."\n";
-        echo $image['name']. "</a></span><br />\n";
-        echo $image['shortdesc']."</div>\n";
-        echo "<div class='vt ar'><b>".$this->lang->line('webshop_price')."</b>: <span class='price'>".$this->lang->line('webshop_currency_symbol').$image['price']."</span><br />\n";
-        echo '<a href="' . site_url()."/".$module. '/cart/'.$image['id']. '"><p class="addtocart">'.$this->lang->line('webshop_buy').'</p></a></div>';
-    echo "\n</div>\n</div>\n";
-}
 
-*/
-echo "<div class=\"clearboth\" ></div>";
-/*
-echo "<pre>";
-print_r ($this->data['mainnav']);
-echo "</pre>";
-*/
-?>
-
-</div>
 
