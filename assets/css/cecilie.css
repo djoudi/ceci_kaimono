@@ -1,9 +1,25 @@
 body{
-    background-color: #a4a380;
+    background-color: #eaeae0;
 }
 
 #wrapper{
     width:960px;
+    height: 740px;
     margin: 0 auto;
     background-color: #fff;
+}
+
+#topnav{
+    height: 47px;
+    background-color: #01291e;
+    
+}
+
+#topnav a{
+    color:#fff;
+    text-decoration: none;
+}
+
+#topnav li{
+    display: inline;
 }
