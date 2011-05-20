@@ -91,7 +91,7 @@ class Public_Controller extends Site_Controller
         // webshop config main_nav_parent_id
         $tree = array();
         // this will store value like english, norwegian etc. not an array
-        $this->language=$this->session->userdata('lang');
+        //$this->language=$this->session->userdata('lang');
         $multilang = $this->preference->item('multi_language');// this will return 1 or 0
         // if preference is not set then use the $this->config->item('language'); from config.php
         $mylanguage = strtolower($this->preference->item('website_language'));// this will return norwegian etc
@@ -106,8 +106,9 @@ class Public_Controller extends Site_Controller
         }
         $this->data['multilang']=$multilang;
         $this->data['mylanguage']=$mylanguage;
-
-        if(empty($this->language)){ // first load, it needs to set it as english
+        $sessionlang= $this->session->userdata('lang');
+        $this->data['sessionlang']= $sessionlang;
+        if(empty($sessionlang)){ // first load, it needs to set it as english
             $this->language='english';
         }else{// otherwise get it from session
             $this->language = $this->session->userdata('lang');

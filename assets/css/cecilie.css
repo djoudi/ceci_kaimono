@@ -6,20 +6,73 @@ body{
     width:960px;
     height: 740px;
     margin: 0 auto;
-    background-color: #fff;
+    background: #fcf8ed url(../images/cecilie/main_bg.png) repeat-y 0 0;
 }
-
+/************
+topnav
+**********************/
 #topnav{
     height: 47px;
     background-color: #01291e;
-    
+    width: 100%;
 }
 
-#topnav a{
+#nav a{
     color:#fff;
     text-decoration: none;
+    line-height: 47px;
+    font-size: 14px;
+    font-family: 'Cantarell', Helvetica, sans-serif;
 }
 
-#topnav li{
+#nav li{
     display: inline;
+    height: 47px;
+    padding: 0 20px;
+}
+
+#nav {
+    width: 690px;
+    margin: 0 auto;
+    height: 47px;
+}
+
+
+
+
+
+/*********
+#header
+*******************/
+#header{
+    width: 790px;
+    height: 45px;
+    margin: 30px auto 20px;
+}
+#header h1{
+    background: url(../images/cecilie/logo.png) no-repeat 50% 0;
+    text-indent: -999px;
+  height: 45px;
+}
+
+#slideshow{
+    width: 790px;
+    height: 356px;
+    margin: 0 auto;
+}
+
+/************
+footer
+*****************/
+#footer{
+    height: 50px;
+}
+
+#footmain{
+    height: 28px;
+    background-color: #01291e;
+    color: #fff;
+    line-height: 28px;
+    font-size: 11px;
+    padding: 0 0 0 60px;
 }

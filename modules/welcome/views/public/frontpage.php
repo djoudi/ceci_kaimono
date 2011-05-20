@@ -1,9 +1,7 @@
 <div id="maintop">
-
-    <?php print displayStatus();?>
-    
-    <?php
-    echo $myclass;
+<?php 
+    print displayStatus();
+ 
 /*
 echo "<pre>get_class is: ";
 print_r($get_class);
