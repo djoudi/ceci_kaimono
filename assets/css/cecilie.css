@@ -2,6 +2,9 @@ body{
     background-color: #eaeae0;
 }
 
+a {
+    text-decoration: none;
+}
 /**********
 fonts
 *************/
@@ -59,6 +62,12 @@ topnav
     width: 100%;
 }
 
+#nav {
+    width: 690px;
+    margin: 0 auto;
+    height: 47px;
+}
+
 #nav a{
     color:#fff;
     text-decoration: none;
@@ -68,17 +77,20 @@ topnav
     text-transform: uppercase; 
 }
 
+
+
 #nav li{
     display: inline;
     height: 47px;
-    padding: 0 10px;
+    padding: 0 10px 10px;
 }
 
-#nav {
-    width: 690px;
-    margin: 0 auto;
-    height: 47px;
+#nav li:hover{
+    background: #01291e url(../images/cecilie/hover_orange.png) no-repeat 50% 17px;
+    line-height: 47px;
 }
+
+
 
 
 
@@ -88,14 +100,17 @@ topnav
 #header
 *******************/
 #header{
-    width: 790px;
+    width: 390px;
     height: 45px;
     margin: 30px auto 20px;
 }
 #header h1{
-    background: url(../images/cecilie/logo.png) no-repeat 50% 0;
-    text-indent: -999px;
+    
   height: 45px;
+}
+
+.negindent{
+ display: none;
 }
 
 #slideshow{
@@ -123,6 +138,17 @@ footer
     padding: 0 0 0 60px;
 }
 
+.phone{
+    padding: 0 0 0 20px;
+}
+
+#orgnum{
+    padding: 0 0 0 20px;
+}
+#webcom {
+    padding: 0 0 0 20px;
+}
+
 /******************
 frontpage
 *********************/
@@ -140,17 +166,18 @@ frontpage
 }
 
 #maincont{
-    width: 270px;
+    width: 460px;
     float: left;
-    
+    padding: 0 10px 0 10px;
 }
-#maincont h2{
+#maincont h2 a, #maincont h2{
     font-family: 'FuturaMedium' , Helvetica, sans-serif;
     font-size: 16px;
     color: #d50e8b;
     line-height: 19px;
     margin: 0;
 }
+
 
 #maincont h3{
     font-family: 'FuturaMedium' , Helvetica, sans-serif;
@@ -165,10 +192,20 @@ frontpage
     line-height: 16px;
     margin: 0;
 }
-#secondcol{
-    width: 160px;
+
+.column{
+    float:left;
+}
+
+#homeone{
+    width: 270px;
+    margin: 0;
+    padding: 0;
+}
+
+#hometwo{
+    width: 180px;
     margin: 0 0 0 10px;
-    float: left;
 }
 
 #collection{
@@ -176,4 +213,24 @@ frontpage
     width: 119px;
     height: 119px;
     margin: -20px 0 0 20px;
+}
+
+
+/****************
+about page
+*********************/
+#aboutpage{
+    
+}
+
+.aboutcol{
+    width: 270px;
+    margin: 0 0 0 10px;
+}
+#aboutone{
+    
+}
+
+#abouttwo{
+    
 }

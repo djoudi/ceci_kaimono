@@ -95,10 +95,10 @@ class Welcome extends Public_Controller {
 	
 	//$data['images'] = $featureimages;
     if($page){// in order to prevent an error after installation
-        $data['title'] = $page['name'];
+        $data['title'] = $this->preference->item('site_name').": ".$page['name'];
         $data['pagecontent'] = $page;
     }else{
-        $data['title'] = 'Welcome';
+        $data['title'] = $this->preference->item('site_name').": ".'Welcome';
         $data['pagecontent'] = '';
     }
     // delete these
@@ -128,7 +128,7 @@ class Welcome extends Public_Controller {
                 // if there is no such a category id, then redirect.
                 redirect( $this->module.'/index','refresh');
         }
-        $data['title'] = lang('webshop_shop_name')." | ". $cat['name'];
+        $data['title'] = $this->preference->item('site_name').": ". $cat['name'];
 
         if ($cat['parentid'] < 1){
                 /**
@@ -147,7 +147,7 @@ class Welcome extends Public_Controller {
                 $data['level'] = 2;
         }
         $data['category'] = $cat;
-        $data['page'] = $this->config->item('backendpro_template_shop') . 'category';
+        $data['page'] = $this->config->item('backendpro_template_public') . 'category';
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -167,13 +167,13 @@ class Welcome extends Public_Controller {
                 redirect( $this->module.'/index','refresh');
         }
         $data['product'] = $product;
-        $data['title'] = lang('webshop_shop_name')." | ". $product['name'];
+        $data['title'] = $this->preference->item('site_name').": ". $product['name'];
 
         // I am not using colors and sizes, but you can.
         $data['assigned_colors'] = $this->MProducts->getAssignedColors($id);
         $data['assigned_sizes'] = $this->MProducts->getAssignedSizes($id);
 
-        $data['page'] = $this->config->item('backendpro_template_shop') . 'product';
+        $data['page'] = $this->config->item('backendpro_template_public') . 'product';
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -192,7 +192,7 @@ class Welcome extends Public_Controller {
                     redirect($this->module.'/contact','refresh');
             }elseif($path =='cart'){
                     redirect($this->module.'/cart','refresh');
-        }elseif($path =='playroom'){
+            }elseif($path =='playroom'){
                     redirect('playroom/index','refresh');
             }elseif($path =='checkout'){
                     redirect($this->module.'/checkout','refresh');
@@ -216,15 +216,15 @@ class Welcome extends Public_Controller {
             $page = $this->MPages->getPagePathLang($path,$lang_id);
         }
             //$page = $this->MPages->getPagePath($path);
-                    if (!empty($page)){//$page will return empty array if there is no page
+            if (!empty($page)){//$page will return empty array if there is no page
             $data['pagecontent'] = $page;
-            $data['title'] = lang('webshop_shop_name')." | ".$page['name'];
-                    }else{
-                            // if there is no page redirect
+            $data['title'] = $this->preference->item('site_name').": ".$page['name'];
+            }else{
+            // if there is no page redirect
             flashMsg('info',$this->lang->line('kago_no_translation'));
             redirect($this->module.'/error');
             }
-            $data['page'] = $this->config->item('backendpro_template_shop') . 'page';
+            $data['page'] = $this->config->item('backendpro_template_public') . 'page';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
         }
@@ -234,9 +234,9 @@ class Welcome extends Public_Controller {
     function contact(){
 	$data['question']= $this->security_question;
         $data['security_method']= $this->security_method;
-        $data['title'] = lang('webshop_shop_name')." | "."Contact us";
+        $data['title'] = $this->preference->item('site_name').": "."Contact us";
         $data['cap_img'] = $this->_generate_captcha();	
-        $data['page'] = $this->config->item('backendpro_template_shop') . 'contact';
+        $data['page'] = $this->config->item('backendpro_template_public') . 'contact';
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -251,8 +251,8 @@ class Welcome extends Public_Controller {
 
     function error(){
 
-        $data['title'] = lang('webshop_shop_name')." | "."Wow! Something went wrong.";
-        $data['page'] = $this->config->item('backendpro_template_shop') . 'error';
+        $data['title'] = $this->preference->item('site_name').": "."Wow! Something went wrong.";
+        $data['page'] = $this->config->item('backendpro_template_public') . 'error';
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -300,8 +300,8 @@ class Welcome extends Public_Controller {
             $this->validation->output_errors();
             $captcha_result = '';
             $data['cap_img'] = $this->_generate_captcha();
-            $data['title'] = lang('webshop_shop_name')." | ". lang('webshop_message_contact_us');
-            $data['page'] = $this->config->item('backendpro_template_shop') . 'contact';
+            $data['title'] = $this->preference->item('site_name').": ". lang('webshop_message_contact_us');
+            $data['page'] = $this->config->item('backendpro_template_public') . 'contact';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
             }else{
@@ -338,7 +338,7 @@ class Welcome extends Public_Controller {
         $data['security_method']= $this->security_method;
         
         if ($this->input->post('email')){
-            $data['title'] = lang('webshop_shop_name')." | "."Registration";
+            $data['title'] = $this->preference->item('site_name').": "."Registration";
             // set rules
             $rules['email'] = 'trim|required|matches[emailconf]|valid_email';
             $rules['emailconf'] = 'trim|required|valid_email';
@@ -378,7 +378,7 @@ class Welcome extends Public_Controller {
                 // if false outputs errors
                 $this->validation->output_errors();
                 // and take them to registration page to show errors
-                $data['page'] = $this->config->item('backendpro_template_shop') . 'registration';
+                $data['page'] = $this->config->item('backendpro_template_public') . 'registration';
                 $data['module'] = $this->module;
                 $this->load->view($this->_container,$data);
                 }else{
@@ -411,8 +411,8 @@ class Welcome extends Public_Controller {
                 }
     }// end of if($this->input->post('email'))
 
-    $data['title'] = lang('webshop_shop_name')." | ". "Registration";
-    $data['page'] = $this->config->item('backendpro_template_shop') . 'registration';
+    $data['title'] = $this->preference->item('site_name').": ". "Registration";
+    $data['page'] = $this->config->item('backendpro_template_public') . 'registration';
     $data['module'] = $this->module;
     $this->load->view($this->_container,$data);
 
@@ -431,8 +431,8 @@ class Welcome extends Public_Controller {
                     flashMsg('info',lang('login_email_pw_incorrect'));
                     redirect( $this->module.'/login','refresh');
             }
-            $data['title'] = lang('webshop_shop_name')." | "."Customer Login";
-            $data['page'] = $this->config->item('backendpro_template_shop') . 'customerlogin';
+            $data['title'] = $this->preference->item('site_name').": "."Customer Login";
+            $data['page'] = $this->config->item('backendpro_template_public') . 'customerlogin';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
 }
@@ -449,7 +449,7 @@ class Welcome extends Public_Controller {
      }
 
     function subscribe(){
-            $data['title']=lang('webshop_shop_name')." | ".'Subscribe to our News letter';
+            $data['title']=$this->preference->item('site_name').": ".'Subscribe to our News letter';
             $data['question']= $this->security_question;
             $data['security_method']= $this->security_method;
             $captcha_result = '';
@@ -491,7 +491,7 @@ class Welcome extends Public_Controller {
                     redirect( $this->module.'/subscribe','refresh');
                 }
             }
-            $data['page'] = $this->config->item('backendpro_template_shop') . 'subscribe';
+            $data['page'] = $this->config->item('backendpro_template_public') . 'subscribe';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
     }
@@ -499,12 +499,12 @@ class Welcome extends Public_Controller {
 
     function unsubscribe($email=''){
         if (!$this->input->post('email')){
-            $data['title']=lang('webshop_shop_name')." | ".'Unsubscribe our Newsletter';
+            $data['title']=$this->preference->item('site_name').": ".'Unsubscribe our Newsletter';
             $captcha_result = '';
             $data['cap_img'] = $this->_generate_captcha();
             $data['question']= $this->security_question;
             $data['security_method']= $this->security_method;
-            $data['page'] = $this->config->item('backendpro_template_shop') . 'unsubscribe';
+            $data['page'] = $this->config->item('backendpro_template_public') . 'unsubscribe';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
         }else{
@@ -550,16 +550,16 @@ class Welcome extends Public_Controller {
                 $this->MOrders->updateCart($productid,$fullproduct);
                 redirect( $this->module.'/product/'.$productid, 'refresh');
             }else{
-                $data['title'] = lang('webshop_shop_name')." | ". "Shopping Cart";
+                $data['title'] = $this->preference->item('site_name').": ". "Shopping Cart";
 
                 if (isset($_SESSION['cart'])){
-                        $data['page'] = $this->config->item('backendpro_template_shop') . 'shoppingcart';
+                        $data['page'] = $this->config->item('backendpro_template_public') . 'shoppingcart';
                         $data['module'] = $this->module;
                         $this->load->view($this->_container,$data);
                 }else{
                         flashMsg('info',lang('orders_no_item_yet'));
                         // $this->session->set_flashdata('msg',lang('orders_no_item_yet'));
-                        $data['page'] = $this->config->item('backendpro_template_shop') . 'shoppingcart';
+                        $data['page'] = $this->config->item('backendpro_template_public') . 'shoppingcart';
                         $data['module'] = $this->module;
                         $this->load->view($this->_container,$data);
                 }
@@ -612,8 +612,8 @@ class Welcome extends Public_Controller {
   	
 	// $this->MOrders->verifyCart();
 	//$data['main'] = 'webshop/confirmorder';// this is using views/confirmaorder.php
-	$data['page'] = $this->config->item('backendpro_template_shop') . 'confirmorder';
-	$data['title'] = lang('webshop_shop_name')." | ". "Order Confirmation";
+	$data['page'] = $this->config->item('backendpro_template_public') . 'confirmorder';
+	$data['title'] = $this->preference->item('site_name').": ". "Order Confirmation";
 	
 	
 	$shippingprice = $this-> shippingprice();
@@ -659,13 +659,13 @@ class Welcome extends Public_Controller {
 		 */
 	}
 	//$data['main'] = 'webshop/search';// this is using views/search.php. Output will be displayed in views/search.php
-	$data['title'] = lang('webshop_shop_name')." | ". "Search Results";
+	$data['title'] = $this->preference->item('site_name').": ". "Search Results";
 	
 	//$this->load->vars($data);
 	//$this->load->view('webshop/template');  
 	
 	
-	$data['page'] = $this->config->item('backendpro_template_shop') . 'search';
+	$data['page'] = $this->config->item('backendpro_template_public') . 'search';
 	$data['module'] = $this->module;
 	$this->load->view($this->_container,$data);
 			
@@ -676,7 +676,7 @@ class Welcome extends Public_Controller {
   
   
   function gallery($id){
-	$data['title'] = lang('webshop_shop_name')." | ". "Gallery " . $id;
+	$data['title'] = $this->preference->item('site_name').": ". "Gallery " . $id;
 	$data['products'] = $this->MProducts->getGallery($id);
 	// getGalleryone returns id, name shortdesc thumbnail image class grouping category
 	$data['main'] = 'gallery';// this is using views/galleryone.php etc
@@ -688,7 +688,7 @@ class Welcome extends Public_Controller {
   
   function emailorder(){
   	
-		$data['title'] = lang('webshop_shop_name')." | ". "checkout";
+		$data['title'] = $this->preference->item('site_name').": ". "checkout";
 		
 		// old way of validation, I hope Bep will update to CI 1.7.2 
 		$fields['customerr_first_name'] = lang('orders_first_name');
@@ -723,7 +723,7 @@ class Welcome extends Public_Controller {
 			// send back to confirmorder. validation error will be displayed automatically
 
 			$this->validation->output_errors();
-			$data['page'] = $this->config->item('backendpro_template_shop') . 'confirmorder';
+			$data['page'] = $this->config->item('backendpro_template_public') . 'confirmorder';
 			$data['module'] = $this->module;
 			$this->load->view($this->_container,$data);
 			}
@@ -804,8 +804,8 @@ class Welcome extends Public_Controller {
 	
 	unset($_SESSION['cart']);
 	unset($_SESSION['totalprice']);
-	$data['title'] = lang('webshop_shop_name')." | ". "Contact us";
-	$data['page'] = $this->config->item('backendpro_template_shop') . 'ordersuccess';
+	$data['title'] = $this->preference->item('site_name').": ". "Contact us";
+	$data['page'] = $this->config->item('backendpro_template_public') . 'ordersuccess';
 	$data['module'] = $this->module;
 	$this->load->view($this->_container,$data);
   }

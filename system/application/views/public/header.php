@@ -47,6 +47,3 @@ echo "\n</ul>\n";
 }
 ?>
     </div>
-    <div id="header">
-        <h1><?php print $this->preference->item('site_name')?></h1>
-    </div>

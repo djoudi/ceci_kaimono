@@ -1,3 +1,5 @@
+
+
 <div id="content">
     <a name="top"></a>
     <?php print displayStatus();?>

@@ -1,6 +1,13 @@
 <div id="maintop">
+    <div id="header">
+        <h1><?php echo anchor(site_url(),"<img src=\"assets/images/cecilie/logo.png\" />"); 
+       // echo "<img src=\"assets/images/cecilie/logo.png\" />";
+            echo "<span class=\"negindent\">". $this->preference->item('site_name')."</span>";
+            ?>
+   </h1>
+    </div>
 <?php 
-    print displayStatus();
+   
  
 /*
 echo "<pre>get_class is: ";
@@ -33,16 +40,12 @@ echo "</pre>";
     }
     ?>
     <div id="frontcont">
-        <img id="lima_logo" src="<?php echo base_url()?>assets/images/cecilie/lima_logo.png" />
     <?php
+    echo anchor("http://www.licensing.org/",'<img id="lima_logo" src="assets/images/cecilie/lima_logo.png" />', array('target' => '_blank'));
     if(isset($pagecontent['content'])){// this if is for the installation without this it will display an error
         echo "<div id='maincont'>".$pagecontent['content']."</div>";
     }
      ?>
-        <div id="secondcol">
-            <p>second language</p>
-        
-        </div>
         
         <img id="collection" src="<?php echo base_url()?>assets/images/cecilie/collection.png" />
         
