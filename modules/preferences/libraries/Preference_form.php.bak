@@ -312,6 +312,7 @@ class Preference_form
 		return form_input($params);
 	}
 }
+}
 
 /* End of file Preference_form.php */
 /* Location: ./modules/preferences/libraries/Preference_form.php */

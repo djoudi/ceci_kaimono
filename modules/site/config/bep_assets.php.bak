@@ -152,7 +152,7 @@ $config['asset'][] = array('file'=>'cecilie.css');
  */
 $config['asset_group']['SITE'] = 'reset|typography';
 $config['asset_group']['PUBLIC'] = 'FlashStatus|cecilie';
-$config['asset_group']['ADMIN'] = 'bep_admin_layout|bep_admin_style|FlashStatus|forms|buttons|bep_navigation|treeview|bep_icons|bep_select_all|flot';
+$config['asset_group']['ADMIN'] = 'bep_admin_layout|bep_admin_style|FlashStatus|forms|buttons|bep_navigation|treeview|bep_icons|bep_select_all';
 
 // Added from here 
 $config['asset_group']['SHOP'] = 'shopcustomtools|FlashStatus|webshop|menu.init';
