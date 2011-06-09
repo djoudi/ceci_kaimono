@@ -90,12 +90,6 @@ topnav
     line-height: 47px;
 }
 
-
-
-
-
-
-
 /*********
 #header
 *******************/
@@ -170,7 +164,7 @@ frontpage
     float: left;
     padding: 0 10px 0 10px;
 }
-#maincont h2 a, #maincont h2{
+h2,#maincont h2 a, #maincont h2{
     font-family: 'FuturaMedium' , Helvetica, sans-serif;
     font-size: 16px;
     color: #d50e8b;
@@ -179,7 +173,7 @@ frontpage
 }
 
 
-#maincont h3{
+h3, #maincont h3{
     font-family: 'FuturaMedium' , Helvetica, sans-serif;
     font-size: 14px;
     color: #d50e8b;
@@ -220,17 +214,19 @@ frontpage
 about page
 *********************/
 #aboutpage{
-    
+    margin: 40px 0 0 205px;
+    width: 560px;
 }
+
 
 .aboutcol{
     width: 270px;
-    margin: 0 0 0 10px;
+    
 }
 #aboutone{
     
 }
 
 #abouttwo{
-    
+    margin: 0 0 0 10px;
 }

@@ -1,3 +1,11 @@
+   <div id="header">
+        <h1><?php echo anchor(site_url(),"<img src=\"assets/images/cecilie/logo.png\" />"); 
+       // echo "<img src=\"assets/images/cecilie/logo.png\" />";
+            echo "<span class=\"negindent\">". $this->preference->item('site_name')."</span>";
+            ?>
+   </h1>
+    </div>
+
 <?php
 /*
 if(isset ($lang_id)){
@@ -15,6 +23,7 @@ print_r($pagecontent);
 echo "</pre>";
  * 
  */
+
 $mystring = strtolower($pagecontent['path']);
 $findme   = 'about';
 $pos = strpos($mystring, $findme);
@@ -27,7 +36,7 @@ if ($pos !== false) {
 } else {
      echo "<div id=\"commonpage\">";
 }
-
+echo "<h2>".$pagecontent['name']."</h2>";
 $prefix="../";
 $pagecontent = str_replace($prefix, "", $pagecontent['content']);
 echo $pagecontent;

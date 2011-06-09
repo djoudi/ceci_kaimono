@@ -108,6 +108,7 @@ class Welcome extends Public_Controller {
     $data['myclass']=$this->myclass;
     // delete upto here
     $data['page'] = $this->config->item('backendpro_template_public') . 'frontpage';
+    $data['header'] ="HOME";
     $data['module'] = $this->module;
     $this->load->view($this->_container,$data);
      
@@ -148,6 +149,7 @@ class Welcome extends Public_Controller {
         }
         $data['category'] = $cat;
         $data['page'] = $this->config->item('backendpro_template_public') . 'category';
+        $data['header'] =$cat['name'];
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -174,6 +176,7 @@ class Welcome extends Public_Controller {
         $data['assigned_sizes'] = $this->MProducts->getAssignedSizes($id);
 
         $data['page'] = $this->config->item('backendpro_template_public') . 'product';
+        $data['header'] =$product['name'];
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -225,6 +228,7 @@ class Welcome extends Public_Controller {
             redirect($this->module.'/error');
             }
             $data['page'] = $this->config->item('backendpro_template_public') . 'page';
+            $data['header'] =$page['name'];
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
         }
@@ -237,6 +241,7 @@ class Welcome extends Public_Controller {
         $data['title'] = $this->preference->item('site_name').": "."Contact us";
         $data['cap_img'] = $this->_generate_captcha();	
         $data['page'] = $this->config->item('backendpro_template_public') . 'contact';
+        $data['header'] = "Contact us";
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -253,6 +258,7 @@ class Welcome extends Public_Controller {
 
         $data['title'] = $this->preference->item('site_name').": "."Wow! Something went wrong.";
         $data['page'] = $this->config->item('backendpro_template_public') . 'error';
+        $data['header'] ="Error";
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
     }
@@ -413,6 +419,7 @@ class Welcome extends Public_Controller {
 
     $data['title'] = $this->preference->item('site_name').": ". "Registration";
     $data['page'] = $this->config->item('backendpro_template_public') . 'registration';
+    $data['header'] ="Registration";
     $data['module'] = $this->module;
     $this->load->view($this->_container,$data);
 
@@ -432,6 +439,7 @@ class Welcome extends Public_Controller {
                     redirect( $this->module.'/login','refresh');
             }
             $data['title'] = $this->preference->item('site_name').": "."Customer Login";
+            $data['header'] ="Customer Login";
             $data['page'] = $this->config->item('backendpro_template_public') . 'customerlogin';
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
@@ -492,6 +500,7 @@ class Welcome extends Public_Controller {
                 }
             }
             $data['page'] = $this->config->item('backendpro_template_public') . 'subscribe';
+            $data['header'] ="Subscribe to our News letter";
             $data['module'] = $this->module;
             $this->load->view($this->_container,$data);
     }
@@ -551,7 +560,7 @@ class Welcome extends Public_Controller {
                 redirect( $this->module.'/product/'.$productid, 'refresh');
             }else{
                 $data['title'] = $this->preference->item('site_name').": ". "Shopping Cart";
-
+                $data['header'] ="Shopping Cart";
                 if (isset($_SESSION['cart'])){
                         $data['page'] = $this->config->item('backendpro_template_public') . 'shoppingcart';
                         $data['module'] = $this->module;
@@ -630,7 +639,7 @@ class Welcome extends Public_Controller {
 		$data['city'] = $_SESSION['city'];
 		$data['pcode'] = $_SESSION['post_code'];
 	}
-	
+	$data['header'] ="Order Confirmation";
 	$data['module'] = $this->module;
 	$this->load->view($this->_container,$data);
   }
@@ -664,7 +673,7 @@ class Welcome extends Public_Controller {
 	//$this->load->vars($data);
 	//$this->load->view('webshop/template');  
 	
-	
+	$data['header'] ="Search Results";
 	$data['page'] = $this->config->item('backendpro_template_public') . 'search';
 	$data['module'] = $this->module;
 	$this->load->view($this->_container,$data);
@@ -675,128 +684,129 @@ class Welcome extends Public_Controller {
   
   
   
-  function gallery($id){
+    function gallery($id){
 	$data['title'] = $this->preference->item('site_name').": ". "Gallery " . $id;
 	$data['products'] = $this->MProducts->getGallery($id);
 	// getGalleryone returns id, name shortdesc thumbnail image class grouping category
 	$data['main'] = 'gallery';// this is using views/galleryone.php etc
 	$data['galleriid']=$id; // used for if statement to add top sub-category 
+        $data['header'] ="Gallery";
 	$this->load->vars($data);
 	$this->load->view('webshop/template'); 
-  }
+    }
   
   
-  function emailorder(){
+    function emailorder(){
   	
-		$data['title'] = $this->preference->item('site_name').": ". "checkout";
-		
-		// old way of validation, I hope Bep will update to CI 1.7.2 
-		$fields['customerr_first_name'] = lang('orders_first_name');
-		$fields['customerr_last_name'] = lang('orders_last_name');
-		$fields['telephone'] = lang('webshop_mobile_tel');
-		$fields['email'] = lang('orders_email');
-		$fields['emaildonf'] = lang('orders_email_confirm');
-		$fields['shippingaddress'] = lang('orders_shipping_address');
-		$fields['city'] = lang('orders_post_code');
-		$fields['post_code'] = lang('orders_city');
-		
-		$this->validation->set_fields($fields);	
-		
-		$rules['customer_first_name'] = 'trim|required|min_length[3]|max_length[20]';
-		$rules['customer_last_name'] = 'trim|required|min_length[3]|max_length[20]';
-		$rules['telephone'] = 'trim|required|min_length[8]|max_length[12]|numeric';
-		$rules['email'] = 'trim|required|matches[emailconf]|valid_email';
-		$rules['emailconf'] = 'trim|required|valid_email';
-		$rules['shippingaddress'] = 'required';
-		$rules['city'] = 'trim|required';
-		$rules['post_code'] = 'trim|required';
-		
-		$this->validation->set_rules($rules);
-		
-		$shippingprice = $this-> shippingprice();
-		$data['shippingprice']=$shippingprice['shippingprice'];
-		
-		if ($this->validation->run() == FALSE)
-		{
-			// $this->session->set_flashdata('msg', 'Please fill all the fields. Please try again!');
-				
-			// send back to confirmorder. validation error will be displayed automatically
+        $data['title'] = $this->preference->item('site_name').": ". "checkout";
 
-			$this->validation->output_errors();
-			$data['page'] = $this->config->item('backendpro_template_public') . 'confirmorder';
-			$data['module'] = $this->module;
-			$this->load->view($this->_container,$data);
-			}
-			else
-			{
-			/*
-			 * If validation is ok, then
-			 * 1. enter customer info to db through $this->MOrders->entercustomerinfo();
-			 * 2. enter oder info to db through $this->MOrders->enterorderinfo();
-			 * 3. enter oder items to db $this->MOrders->enterorderitems();
-			 * 4. send email to the customer and me
-			 * 5. redirect to ordersuccess page and display thanks message
-			 *
-			 */
-			$totalprice = $_SESSION['totalprice'];
-			
-			$this->MOrders->enterorder($totalprice);
-			
-			//Create body of message by cleaning each field and then appending each name and value to it
-			
-			$body = "<h1>".lang('email_here_is')."</h1><br />";
-			$email = db_clean($this->input->post('email'));
-			$lastname = db_clean($this->input->post('lname'));
-			$firstname = db_clean($this->input->post('fname'));
-			$name = $firstname + " " + $lastname;
-			
-			// $shipping= 65;
-			$shipping = $_SESSION['shippingprice'];
-			$body .= "<table border='1' cellspacing='0' cellpadding='5' width='80%'><tr><td><b>".lang('email_number_of_order')."</b></td><td><b>".lang('email_product_name')."</b></td><td><b>".lang('email_product_price')."</b></td></tr>";
-			if (count($_SESSION['cart'])){
-				$count = 1;
-				foreach ($_SESSION['cart'] as $PID => $row){
-				  
-					$body .= "<tr><td><b>". $row['count'] . "</b></td><td><b>" . $row['name'] . "</b></td><td><b>" . $row['price']."</b></td></tr>";
-				}
-			}
-			$grandtotal = (int)$totalprice + $shipping;
-			$body .= "<tr><td colspan='2'><b>".lang('orders_sub_total_nor')." </b></td><td colspan='1'><b>".number_format($totalprice,2,'.',','). "</b></td></tr>";
-			$body .= "<tr><td colspan='2'><b>".lang('orders_shipping_nor')." </b></td><td colspan='1'><b>". number_format($shipping ,2,'.',',') . "</b></td></tr>";
-			$body .= "<tr><td colspan='2'><b>".lang('orders_total_with_shipping')." </b></td><td colspan='1'><b>".number_format($grandtotal,2,'.',','). "</b></td></tr>";
-			$body .= "</table><br />";
-			
-			$body .= "<table border=\"1\" cellspacing='0' cellpadding='5' width='80%'>";
-			$body .= "<tr><td><b>".lang('orders_name').": </b></td><td><b>". $_POST['customer_first_name']." ". $_POST['customer_last_name']."</b></td></tr>";
-			$body .= "<tr><td><b>".lang('orders_email').": </b></td><td><b>". $_POST['email']. "</b></td></tr>";
-			$body .= "<tr><td><b>".lang('webshop_mobile_tel').": </b></td><td><b>". $_POST['telephone']. "</b></td></tr>";
-			$body .= "<tr><td><b>".lang('orders_shipping_address').": </b></td><td><b>". $_POST['shippingaddress']. "</b></td></tr>";
-			$body .= "<tr><td><b>".lang('orders_post_code').": </b></td><td><b>". $_POST['post_code']. "</b></td></tr>";
-			$body .= "<tr><td><b>".lang('orders_city').": </b></td><td><b>". $_POST['city']. "</b></td></tr>";
-			$body .= "</table>";
-			$body .= "<p><b>".lang('email_we_will_call')."</b></p>";
-			extract($_POST);
-			//removes newlines and returns from $email and $name so they can't smuggle extra email addresses for spammers
-			
-			$headers = "Content-Type: text/html; charset=UTF-8\n";
-			$headers .= "Content-Transfer-Encoding: 8bit\n\n";
-			
-			//Create header that puts email in From box along with name in parentheses and sends bcc to alternate address
-			$from='From: '. $email . "(" . $name . ")" . "\r\n" . 'Bcc: admin@gmail.com' . "\r\n";
-			
-			//Creates intelligible subject line that also shows me where it came from
-			$subject = 'webshop.com Order confirmation';
+        // old way of validation, I hope Bep will update to CI 1.7.2 
+        $fields['customerr_first_name'] = lang('orders_first_name');
+        $fields['customerr_last_name'] = lang('orders_last_name');
+        $fields['telephone'] = lang('webshop_mobile_tel');
+        $fields['email'] = lang('orders_email');
+        $fields['emaildonf'] = lang('orders_email_confirm');
+        $fields['shippingaddress'] = lang('orders_shipping_address');
+        $fields['city'] = lang('orders_post_code');
+        $fields['post_code'] = lang('orders_city');
 
-                        $admin_email = $this->preference->item('admin_email');
-			//Sends mail to me, with elements created above
-			 mail ($admin_email, $subject, $body, $headers, $from);
-                         $site_name = $this->preference->item('site_name');
-			// Send confirmation email to the customer
-			 mail ($email, $subject, $body, $headers,$site_name);
-	
-			// $this->session->set_flashdata('msg', 'Thank you for your order! We will get in touch as soon as possible.');
-			redirect($this->module.'/ordersuccess');
-		}
+        $this->validation->set_fields($fields);	
+
+        $rules['customer_first_name'] = 'trim|required|min_length[3]|max_length[20]';
+        $rules['customer_last_name'] = 'trim|required|min_length[3]|max_length[20]';
+        $rules['telephone'] = 'trim|required|min_length[8]|max_length[12]|numeric';
+        $rules['email'] = 'trim|required|matches[emailconf]|valid_email';
+        $rules['emailconf'] = 'trim|required|valid_email';
+        $rules['shippingaddress'] = 'required';
+        $rules['city'] = 'trim|required';
+        $rules['post_code'] = 'trim|required';
+
+        $this->validation->set_rules($rules);
+
+        $shippingprice = $this-> shippingprice();
+        $data['shippingprice']=$shippingprice['shippingprice'];
+
+        if ($this->validation->run() == FALSE)
+        {
+                // $this->session->set_flashdata('msg', 'Please fill all the fields. Please try again!');
+
+                // send back to confirmorder. validation error will be displayed automatically
+
+                $this->validation->output_errors();
+                $data['page'] = $this->config->item('backendpro_template_public') . 'confirmorder';
+                $data['module'] = $this->module;
+                $this->load->view($this->_container,$data);
+                }
+                else
+                {
+                /*
+                 * If validation is ok, then
+                 * 1. enter customer info to db through $this->MOrders->entercustomerinfo();
+                 * 2. enter oder info to db through $this->MOrders->enterorderinfo();
+                 * 3. enter oder items to db $this->MOrders->enterorderitems();
+                 * 4. send email to the customer and me
+                 * 5. redirect to ordersuccess page and display thanks message
+                 *
+                 */
+                $totalprice = $_SESSION['totalprice'];
+
+                $this->MOrders->enterorder($totalprice);
+
+                //Create body of message by cleaning each field and then appending each name and value to it
+
+                $body = "<h1>".lang('email_here_is')."</h1><br />";
+                $email = db_clean($this->input->post('email'));
+                $lastname = db_clean($this->input->post('lname'));
+                $firstname = db_clean($this->input->post('fname'));
+                $name = $firstname + " " + $lastname;
+
+                // $shipping= 65;
+                $shipping = $_SESSION['shippingprice'];
+                $body .= "<table border='1' cellspacing='0' cellpadding='5' width='80%'><tr><td><b>".lang('email_number_of_order')."</b></td><td><b>".lang('email_product_name')."</b></td><td><b>".lang('email_product_price')."</b></td></tr>";
+                if (count($_SESSION['cart'])){
+                        $count = 1;
+                        foreach ($_SESSION['cart'] as $PID => $row){
+
+                                $body .= "<tr><td><b>". $row['count'] . "</b></td><td><b>" . $row['name'] . "</b></td><td><b>" . $row['price']."</b></td></tr>";
+                        }
+                }
+                $grandtotal = (int)$totalprice + $shipping;
+                $body .= "<tr><td colspan='2'><b>".lang('orders_sub_total_nor')." </b></td><td colspan='1'><b>".number_format($totalprice,2,'.',','). "</b></td></tr>";
+                $body .= "<tr><td colspan='2'><b>".lang('orders_shipping_nor')." </b></td><td colspan='1'><b>". number_format($shipping ,2,'.',',') . "</b></td></tr>";
+                $body .= "<tr><td colspan='2'><b>".lang('orders_total_with_shipping')." </b></td><td colspan='1'><b>".number_format($grandtotal,2,'.',','). "</b></td></tr>";
+                $body .= "</table><br />";
+
+                $body .= "<table border=\"1\" cellspacing='0' cellpadding='5' width='80%'>";
+                $body .= "<tr><td><b>".lang('orders_name').": </b></td><td><b>". $_POST['customer_first_name']." ". $_POST['customer_last_name']."</b></td></tr>";
+                $body .= "<tr><td><b>".lang('orders_email').": </b></td><td><b>". $_POST['email']. "</b></td></tr>";
+                $body .= "<tr><td><b>".lang('webshop_mobile_tel').": </b></td><td><b>". $_POST['telephone']. "</b></td></tr>";
+                $body .= "<tr><td><b>".lang('orders_shipping_address').": </b></td><td><b>". $_POST['shippingaddress']. "</b></td></tr>";
+                $body .= "<tr><td><b>".lang('orders_post_code').": </b></td><td><b>". $_POST['post_code']. "</b></td></tr>";
+                $body .= "<tr><td><b>".lang('orders_city').": </b></td><td><b>". $_POST['city']. "</b></td></tr>";
+                $body .= "</table>";
+                $body .= "<p><b>".lang('email_we_will_call')."</b></p>";
+                extract($_POST);
+                //removes newlines and returns from $email and $name so they can't smuggle extra email addresses for spammers
+
+                $headers = "Content-Type: text/html; charset=UTF-8\n";
+                $headers .= "Content-Transfer-Encoding: 8bit\n\n";
+
+                //Create header that puts email in From box along with name in parentheses and sends bcc to alternate address
+                $from='From: '. $email . "(" . $name . ")" . "\r\n" . 'Bcc: admin@gmail.com' . "\r\n";
+
+                //Creates intelligible subject line that also shows me where it came from
+                $subject = 'webshop.com Order confirmation';
+
+                $admin_email = $this->preference->item('admin_email');
+                //Sends mail to me, with elements created above
+                 mail ($admin_email, $subject, $body, $headers, $from);
+                 $site_name = $this->preference->item('site_name');
+                // Send confirmation email to the customer
+                 mail ($email, $subject, $body, $headers,$site_name);
+
+                // $this->session->set_flashdata('msg', 'Thank you for your order! We will get in touch as soon as possible.');
+                redirect($this->module.'/ordersuccess');
+        }
   	}
 	
   
@@ -804,8 +814,9 @@ class Welcome extends Public_Controller {
 	
 	unset($_SESSION['cart']);
 	unset($_SESSION['totalprice']);
-	$data['title'] = $this->preference->item('site_name').": ". "Contact us";
+	$data['title'] = $this->preference->item('site_name').": ". "Order Success";
 	$data['page'] = $this->config->item('backendpro_template_public') . 'ordersuccess';
+        $data['header'] ="Order Success";
 	$data['module'] = $this->module;
 	$this->load->view($this->_container,$data);
   }
