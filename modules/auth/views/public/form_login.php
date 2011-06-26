@@ -1,3 +1,4 @@
+<div id="beppages">
 <h3><?php print $header?></h3>
 <?php print form_open('auth/login',array('class'=>'horizontal'))?>
     <fieldset>
@@ -45,3 +46,4 @@
         </ol>
     </fieldset>
 <?php print form_close()?>
+</div>

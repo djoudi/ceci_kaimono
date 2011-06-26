@@ -7,11 +7,16 @@ class MPages extends Model{
 	}
 
 
-	function getPage($id){
+	function getPage($id, $table=NULL){
 	    $data = array();
 	    $this->db->where('id',id_clean($id));
 	    $this->db->limit(1);
-	    $Q = $this->db->get('omc_pages');
+            if(!empty($table)){
+                $Q = $this->db->get($table);
+            }  else {
+                $Q = $this->db->get('omc_pages');
+            }
+	    
 	    if ($Q->num_rows() > 0){
 	      	$data = $Q->row_array();
 	    }
@@ -19,12 +24,17 @@ class MPages extends Model{
 	    return $data;    
 	}
 	
-	function getPagePath($path){
+	function getPagePath($path,$table=NULL){
 	    $data = array();
 	    $this->db->where('path',db_clean($path));
 	    $this->db->where('status', 'active');
 	    $this->db->limit(1);
-	    $Q = $this->db->get('omc_pages');
+            if($table !==NULL){
+                $Q = $this->db->get($table);
+            }  else {
+                $Q = $this->db->get('omc_pages');
+            }
+	    
 	    if ($Q->num_rows() > 0){
 	      	$data = $Q->row_array();
 	    }else{
@@ -35,20 +45,23 @@ class MPages extends Model{
 	}
 
 
-    function getPagePathLang($path,$lang_id=NULL){
+    function getPagePathLang($path,$lang_id=NULL,$table=NULL){
         $data = array();
         if (!$lang_id == NULL ){// this must not be english
             $this->db->where('lang_id',$lang_id);
         }
-
 	    $this->db->where('path',db_clean($path));
 	    $this->db->where('status', 'active');
 	    $this->db->limit(1);
-	    $Q = $this->db->get('omc_pages');
+            if(!empty($table)){
+                $Q = $this->db->get($table);
+            }  else {
+                $Q = $this->db->get('omc_pages');
+            }
 	    if ($Q->num_rows() > 0){
 	      	$data = $Q->row_array();
 	    }else{
-			$data = array();// this prevent visiting unexistent page
+		$data = array();// this prevent visiting unexistent page
 		}
 	    $Q->free_result();
 	    return $data;
@@ -151,9 +164,14 @@ class MPages extends Model{
          * plus this one must show only english or lang_id = 0
          * @return array
          */
-	 function getIdwithnone(){
+	 function getIdwithnone($table=NULL){
 	     $data[0] = 'none';
-	     $Q = $this->db->get_where('omc_pages', array('lang_id'=>0));
+             if(isset($table)){
+                 $Q = $this->db->get_where($table, array('lang_id'=>0));
+             }else{
+                 $Q = $this->db->get_where('omc_pages', array('lang_id'=>0));
+             }
+	     
 	     if ($Q->num_rows() > 0){
 	       	foreach ($Q->result_array() as $row){
 	        	$data[$row['id']] = $row['path'];
@@ -165,9 +183,14 @@ class MPages extends Model{
 
 
      
-     function getIdwithnoneLang($lang_id){
+     function getIdwithnoneLang($lang_id, $table){
 	     $data[0] = 'none';
-	     $Q = $this->db->get_where('omc_pages', array('lang_id'=>$lang_id));
+             if(!empty($table)){
+                 $Q = $this->db->get_where($table, array('lang_id'=>$lang_id));
+             }  else {
+                 $Q = $this->db->get_where('omc_pages', array('lang_id'=>$lang_id));
+             }
+	     
 	     if ($Q->num_rows() > 0){
 	       	foreach ($Q->result_array() as $row){
 	        	$data[$row['id']] = $row['path'];
@@ -177,9 +200,14 @@ class MPages extends Model{
 	    return $data;
 	 }
 
-     function getIdwithnoneAll(){
+     function getIdwithnoneAll($table=NULL){
 	     $data[0] = 'none';
-	     $Q = $this->db->get('omc_pages');
+             if(!empty($table)){
+                 $Q = $this->db->get($table);
+             }else{
+                 $Q = $this->db->get('omc_pages');
+             }
+	     
 	     if ($Q->num_rows() > 0){
 	       	foreach ($Q->result_array() as $row){
 	        	$data[$row['id']] = $row['path'];

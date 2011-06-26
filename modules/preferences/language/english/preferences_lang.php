@@ -81,8 +81,7 @@ $lang['preference_label_company_other_two'] = "Company Other Info";
 
 // analytics
 $lang['preference_label_ga_tracking'] = "Google Analytics Tracking Code";
-$lang['preference_desc_ga_tracking'] = 'Enter your Google Analytic Tracking Code to activate Google Analytics view data capturing. E.g: UA-19483569-6
-';
+$lang['preference_desc_ga_tracking'] = 'Enter your Google Analytic Tracking Code to activate Google Analytics view data capturing. E.g: UA-19483569-6';
 $lang['preference_label_ga_profile'] = "Google Analytics Profile";
 $lang['preference_desc_ga_profile'] = 'Profile ID for this website in Google Analytics.';
 $lang['preference_label_ga_email'] = "Google Analytics E-mail";
@@ -92,12 +91,15 @@ $lang['preference_desc_ga_password'] = 'Google Analytics password. This is also 
 
 // RSS feeds
 $lang['preference_label_dashboard_rss'] = "Dashboard RSS Feed";
-$lang['preference_desc_dashboard_rss'] = 'Link to an RSS feed that will be displayed on the dashboard.
-';
+$lang['preference_desc_dashboard_rss'] = 'Link to an RSS feed that will be displayed on the dashboard.';
 $lang['preference_label_dashboard_rss_count'] = "Dashboard RSS Items";
-$lang['preference_desc_dashboard_rss_count'] = 'How many RSS items would you like to display on the dashboard ?
-';
+$lang['preference_desc_dashboard_rss_count'] = 'How many RSS items would you like to display on the dashboard ?';
 
+// cecilieokada.com Settings
+$lang['preference_label_category_menu_id'] = "Category Menu ID";
+$lang['preference_desc_category_menu_id'] = 'Go to menus/admin and find menu id which you want to show the category under it. i.e ID of other work. ';
+$lang['preference_label_lilly_fairies_submenu_id'] = "Lilly Fairies Submenu ID";
+$lang['preference_desc_lilly_fairies_submenu_id'] = 'Go to menus/admin and find menu ID which you want to show for the Lilly Fairies.';
 
 
 

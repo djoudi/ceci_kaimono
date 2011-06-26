@@ -54,7 +54,8 @@ class Admin_Controller extends Site_Controller
 		// Load the ADMIN asset group
 		$this->bep_assets->load_asset_group('ADMIN');
 		
-		
+		// Loading module model for menu on the left
+		$this->load->module_model('category','MCats');
 		// Loading language file here rather than Shop_admin_controller.php. 
 		// Otherwise menu items will not be displayed
 		$this->lang->load('shop');

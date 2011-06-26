@@ -43,7 +43,22 @@ if (count($slideshow)){
 	echo "</tbody></table>";
 	echo form_close();
 }
+?>
+
+<div class="buttons clearboth">
+	<a href="<?php print  site_url('slideshow/admin/updatecu3erxml')?>">
+    <?php print $this->bep_assets->icon('add');?>
+    <?php print "Create CU3ER file"; ?>
+    </a>
+</div>
+<?php
 /*
+echo "<pre>test";
+print_r ($test);
+echo "</pre>";
+foreach($test as $key =>$image){
+    echo $image['name'];
+}
 echo "<pre>slideshow";
 print_r ($slideshow);
 echo "</pre>";

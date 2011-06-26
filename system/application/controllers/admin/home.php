@@ -51,7 +51,7 @@ function index()
 
         // Assign widgets to dashboard
         if($this->preference->item('ga_email') AND $this->preference->item('ga_password') AND $this->preference->item('ga_profile')){
-        $this->dashboard->assign_widget(new widget('Analytics',$this->analytics_widget->create()),'top');
+        $this->dashboard->assign_widget(new widget($this->lang->line('dashboard_analytics'),$this->analytics_widget->create()),'top');
         }
 
 

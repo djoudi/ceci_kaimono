@@ -6,6 +6,7 @@
             ?>
    </h1>
     </div>
+    <div id="slidecontainer">
 <?php 
    
  
@@ -26,6 +27,7 @@ echo "<pre>navlist: ";
 print_r ($this->data['navlist']);
 echo "</pre>";
 */
+
     if(!empty($slides)){
         echo "<div id=\"slideshow\" class=\"pics\">";
         foreach ($slides as $slide)
@@ -39,6 +41,7 @@ echo "</pre>";
         echo "</div>";
     }
     ?>
+    </div><!-- end of slidecontatier -->
     <div id="frontcont">
     <?php
     echo anchor("http://www.licensing.org/",'<img id="lima_logo" src="assets/images/cecilie/lima_logo.png" />', array('target' => '_blank'));
@@ -53,5 +56,7 @@ echo "</pre>";
 </div>
 
 
-
+<?php
+//print_r ($pagecontent);
+?>
 

@@ -105,13 +105,17 @@ $config['asset'][] = array('file'=>'default.css');
 // webshop
 $config['asset'][] = array('file'=>'webshop.css');
 	// dropdown menu
-$config['asset'][] = array('file'=>'menu.init.js', 'needs'=>'jquery');	
+$config['asset'][] = array('file'=>'cecilie.init.js', 'needs'=>'jquery.colorbox-min');// need to be at the end	
 	// delete item or recalculate
 $config['asset'][] = array('file'=>'shopcustomtools.js', 'needs'=>'jquery');
 	// menu, slideshow for the front page
 $config['asset'][] = array('file'=>'jquery.innerfade.js', 'needs'=>'jquery');	
 	// browser detect js
 // $config['asset'][] = array('file'=>'browserDetect-min.js', 'needs'=>'jquery');
+
+// lightbox
+$config['asset'][] = array('file'=>'colorbox.css');
+$config['asset'][] = array('file'=>'jquery.colorbox-min.js', 'needs'=>'jquery');
 
 // TINYMCE 
 $config['asset'][] = array('file'=>'tiny_mce.js');
@@ -151,7 +155,7 @@ $config['asset'][] = array('file'=>'cecilie.css');
  * Where <asset_n> is the name of the asset file specified in the array above.
  */
 $config['asset_group']['SITE'] = 'reset|typography';
-$config['asset_group']['PUBLIC'] = 'FlashStatus|cecilie';
+$config['asset_group']['PUBLIC'] = 'FlashStatus|cecilie|cecilie.init|colorbox|jquery.colorbox-min';
 $config['asset_group']['ADMIN'] = 'bep_admin_layout|bep_admin_style|FlashStatus|forms|buttons|bep_navigation|treeview|bep_icons|bep_select_all|flot';
 
 // Added from here 

@@ -24,7 +24,8 @@ class Admin extends Shop_Admin_Controller {
         $data['title'] = "Manage Products";
         //$data['products'] = $this->MProducts->getAllProducts();
         // hard to use $this->MKaimonokago->getAll($this->module,$fields, $orderby); for products
-        $data['products'] = $this->MProducts->getAllProductswithLang();
+        $order= 'lang_id,order';
+        $data['products'] = $this->MProducts->getAllProductswithLang($order);
         $data['categories'] = $this->MCats->getCategoriesDropDown();
         // we are pulling a header word from language file
         $data['header'] = $this->lang->line('backendpro_access_control');

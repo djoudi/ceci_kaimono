@@ -80,11 +80,11 @@ class MLangs extends Base_model{
         $data = array();
         $table = 'omc_'.$module;
         $this->db->join($table, "$table.lang_id = omc_languages.id", 'left');
-        if ($module=='pages'){
+        if ($module=='pages' OR $module =='lilly_fairies_pages'){
            // $this->db->join($table, 'omc_pages.lang_id = omc_languages.id', 'left');
             //$Q = $this->db->get_where('omc_languages', array('omc_pages.path' => $path));
             $table_field = $table.".path";
-        }  elseif ($module=='menus') {
+        }  elseif ($module=='menus' OR $module =='lilly_fairies_menus') {
            // $this->db->join($table, 'omc_menus.lang_id = omc_languages.id', 'left');
             //$Q = $this->db->get_where('omc_languages', array('omc_menus.menu_id' => $path));
              $table_field = $table.".menu_id";

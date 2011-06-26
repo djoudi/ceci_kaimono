@@ -28,10 +28,19 @@ class MProducts extends Model{
             // getting all the products of the same categroy.
     $data = array();
    //$this->db->order_by('table_id','asc');
+    /*
+     // This is for multi-lang 
         $Q = $this->db->query('SELECT P.*, L.langname, C.Name AS CatName FROM omc_products AS P
         LEFT JOIN omc_category AS C ON C.id = P.category_id
         LEFT JOIN omc_languages AS L ON L.id = P.lang_id
         ORDER BY table_id ASC ');
+      */  
+    // for cecilieokada, one language this is ok. If it is multilang, then change back to the above one
+        $this->db->select('omc_products.*, omc_languages.langname, omc_category.Name AS CatName')->from('omc_products')
+                ->join('omc_category','omc_category.id=omc_products.category_id','left')
+                ->join('omc_languages','omc_languages.id=omc_products.lang_id','left')
+                ->order_by('omc_products.category_id')->order_by('omc_products.product_order');
+        $Q = $this->db->get();
         if ($Q->num_rows() > 0){
             foreach ($Q->result_array() as $row){
             $data[] = $row;
@@ -51,7 +60,8 @@ class MProducts extends Model{
          $data = array();
          $this->db->where('category_id', id_clean($catid));
          $this->db->where('status', 'active');
-         $this->db->orderby('name','asc');
+         //$this->db->orderby('name','asc');
+         $this->db->orderby('product_order','asc');
          $Q = $this->db->get('omc_products');
          if ($Q->num_rows() > 0){
            foreach ($Q->result_array() as $row){
@@ -62,6 +72,26 @@ class MProducts extends Model{
         return $data;
      }
 
+     
+      function getAllProductsByCategory($catid){
+      // this is used in function cat($id) in the shop frontend
+      // When a product is clicked this will be used.
+      // If not $cat['parentid'] < 1
+      // $catid is given in URI, the third element
+         $data = array();
+         $this->db->where('category_id', id_clean($catid));
+         //$this->db->where('status', 'active');
+         //$this->db->orderby('name','asc');
+         $this->db->orderby('product_order','asc');
+         $Q = $this->db->get('omc_products');
+         if ($Q->num_rows() > 0){
+           foreach ($Q->result_array() as $row){
+             $data[] = $row;
+           }
+        }
+        $Q->free_result();
+        return $data;
+     }
 
       function getProductsByGroup($limit,$group,$skip){
        // page 99
@@ -110,6 +140,29 @@ class MProducts extends Model{
         return $data;
      }
 
+     function getPatterns(){
+        $data = array();
+        $Q = $this->db->query('SELECT P.*, C.Name AS CatName
+                           FROM omc_products AS P
+                           LEFT JOIN omc_category C
+                           ON C.id = P.category_id
+                           WHERE C.Name = "Patterns"
+                           AND P.status = "active"
+                           ');
+
+
+        if ($Q->num_rows() > 0){
+        foreach ($Q->result_array() as $row){
+         $data[] = $row;
+        }
+        }
+
+        $Q->free_result();
+
+        return $data;
+     }
+     
+     
      function getMainFeature(){
          $data = array();
          $this->db->select("id,name,shortdesc,image");

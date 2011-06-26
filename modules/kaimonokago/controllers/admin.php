@@ -8,6 +8,8 @@ class Admin extends Shop_Admin_Controller {
     private $module;
     private $table;
     private $id;
+    private $sub_controller; // for cecilieokada.com products/manage/
+    private $category_id; // for cecilieokada.com products/manage/
 
     public function __construct() {
 
@@ -15,6 +17,8 @@ class Admin extends Shop_Admin_Controller {
         $this->module = $this->uri->segment(4);
         $this->table = "omc_".$this->module;
         $this->id = $this->uri->segment(5);
+        $this->sub_controller = $this->uri->segment(6);
+        $this->category_id = $this->uri->segment(7);
     }
 
 
@@ -25,7 +29,12 @@ class Admin extends Shop_Admin_Controller {
             $this->MKaimonokago->changeStatus($this->module,$this->id);
         }
         flashMsg('success',$this->lang->line('kago_status_changed'));
-        redirect($this->module."/admin/index/","refresh");
+        if(!empty($this->sub_controller)){// for cecilieokada.com products/manage/
+            redirect($this->module."/".$this->sub_controller."/index/".$this->category_id,"refresh");
+        }else{
+            redirect($this->module."/admin/index/","refresh");
+        }
+        
     }
 
 
@@ -33,7 +42,11 @@ class Admin extends Shop_Admin_Controller {
         $this->MKaimonokago->deleteitem($this->table, $this->id);
         $this->session->set_flashdata('message',$this->lang->line('kago_deleted'));
         flashMsg('success',$this->lang->line('kago_deleted'));
-        redirect($this->module."/admin/index/","refresh");
+         if(!empty($this->sub_controller)){// for cecilieokada.com products/manage/
+            redirect($this->module."/".$this->sub_controller."/index/".$this->category_id,"refresh");
+        }else{
+            redirect($this->module."/admin/index/","refresh");
+        }
     }
 
 

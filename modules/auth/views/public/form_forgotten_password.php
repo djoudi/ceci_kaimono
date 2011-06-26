@@ -1,3 +1,4 @@
+<div id="beppages">
 <h3><?php print $header?></h3>
 <?php print form_open('auth/forgotten_password',array('class'=>'vertical'))?>
     <fieldset>
@@ -22,3 +23,4 @@
         </ol>
     </fieldset>
 <?php print form_close()?>
+</div>

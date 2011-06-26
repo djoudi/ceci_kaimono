@@ -784,7 +784,7 @@ var flashvars = {};
 		var attributes = {};
 		attributes.wmode = "transparent";
 		attributes.id = "slider";
-		swfobject.embedSWF("assets/cu3er/cu3er.swf", "slideshow", "516", "200", "9", "assets/cu3er/expressInstall.swf", flashvars, attributes);
+		swfobject.embedSWF("assets/cu3er/cu3er.swf", "slideshow", "790", "356", "9", "assets/cu3er/expressInstall.swf", flashvars, attributes);
 		
 		
 $(document).ready(function(){

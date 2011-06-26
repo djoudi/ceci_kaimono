@@ -1,3 +1,10 @@
+<?php     // adding centres for menu on the left
+          // Load modules/centres/models/MCentres
+          // Loading it in Admin_controller
+          // $this->load->module_model('centres','MCentres');
+          $categories = $this->MCats->getCategoriesDropDown();
+?>
+
 <li id="menu_bep_general"><span class="icon_general"><?php print $this->lang->line('backendpro_general')?></span>
         <ul>
             <?php if(check('Calendar',NULL,FALSE) && $this->preference->item('calendar')):?><li><?php print anchor('calendar/admin',$this->lang->line('backendpro_calendar'),array('class'=>'icon_calendar'))?></li><?php echo "\n"; endif;?>
@@ -14,3 +21,22 @@
             <?php if(check('Subscribers',NULL,FALSE) && $this->preference->item('subscribers')):?><li><?php print anchor('subscribers/admin',$this->lang->line('backendpro_subscribers'),array('class'=>'icon_user_red'))?></li><?php echo "\n"; endif;?>
         </ul>
     </li>
+<li id="categories"><span class="icon_application_cascade"><?php print 'Other Work'?></span>
+    <ul>       
+        <?php if(check('Category',NULL,FALSE)):?>
+        <?php
+        foreach ($categories as $key => $list){
+            echo "<li>";
+            echo anchor("products/manage/index/$key",$list,array('class'=>'icon_application_form_magnify'));
+            echo "</li>";
+        }
+        ?>
+        <?php echo "\n"; endif;?> 
+    </ul>
+</li>
+<li id="cecilie"><span class="icon_user_red"><?php print 'Lilly Fairies'?></span>
+    <ul>       
+        <?php if(check('Menus',NULL,FALSE) && $this->preference->item('menus')):?><li><?php print anchor('lilly_fairies_menus/admin',$this->lang->line('backendpro_menus'),array('class'=>'icon_folder'))?></li><?php echo "\n"; endif;?>
+        <?php if(check('Pages',NULL,FALSE) && $this->preference->item('pages')):?><li><?php print anchor('lilly_fairies_pages/admin',$this->lang->line('backendpro_pages'),array('class'=>'icon_page'))?></li><?php echo "\n"; endif;?>
+    </ul>
+</li>

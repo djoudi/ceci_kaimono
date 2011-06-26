@@ -48,14 +48,19 @@
 
     </div>
     <div id="headnav">
-
     <?php
 if(count($this->data['mainnav'])){
     echo "\n<ul id='nav'>";
 
     foreach ($this->data['mainnav'] as $key => $menu){
+        $activeid = $this->uri->segment(3); // for active class
+        if($menu['id']==$activeid){
+            $activeclass="active";
+        }else{
+            $activeclass="notactive";
+        }
          if($menu['lang_id']==$this->data['lang_id']){
-        echo "\n<li class='menuone'>\n";
+        echo "\n<li class='menuone ".$activeclass."'>\n";
         // need to find page uri from id
         // menu /page_uri/lang_id
        
@@ -89,3 +94,4 @@ echo "\n</ul>\n";
         </div>
     </div>
    <!-- End of div header-->
+   <h2>hitest</h2>
