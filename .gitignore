@@ -2,9 +2,11 @@
 
 system/application/config/database.php
 system/application/config/config.php
-system/logs
+system/logs/
+system/cache/
+
 modules/recaptcha/config/recaptcha.php
-assets/images/cecilie/
+# assets/images/cecilie/
 
 
 # Vim leave-behinds
