@@ -81,8 +81,7 @@ $lang['preference_label_company_other_two'] = "Company Other Info";
 
 // analytics
 $lang['preference_label_ga_tracking'] = "Google Analytics Tracking Code";
-$lang['preference_desc_ga_tracking'] = 'Enter your Google Analytic Tracking Code to activate Google Analytics view data capturing. E.g: UA-19483569-6
-';
+$lang['preference_desc_ga_tracking'] = 'Enter your Google Analytic Tracking Code to activate Google Analytics view data capturing. E.g: UA-19483569-6';
 $lang['preference_label_ga_profile'] = "Google Analytics Profile";
 $lang['preference_desc_ga_profile'] = 'Profile ID for this website in Google Analytics.';
 $lang['preference_label_ga_email'] = "Google Analytics E-mail";
@@ -92,12 +91,21 @@ $lang['preference_desc_ga_password'] = 'Google Analytics password. This is also 
 
 // RSS feeds
 $lang['preference_label_dashboard_rss'] = "Dashboard RSS Feed";
-$lang['preference_desc_dashboard_rss'] = 'Link to an RSS feed that will be displayed on the dashboard.
-';
+$lang['preference_desc_dashboard_rss'] = 'Link to an RSS feed that will be displayed on the dashboard.';
 $lang['preference_label_dashboard_rss_count'] = "Dashboard RSS Items";
-$lang['preference_desc_dashboard_rss_count'] = 'How many RSS items would you like to display on the dashboard ?
-';
+$lang['preference_desc_dashboard_rss_count'] = 'How many RSS items would you like to display on the dashboard ?';
 
+// cecilieokada.com Settings
+$lang['preference_label_category_menu_id'] = "Category Menu ID";
+$lang['preference_desc_category_menu_id'] = 'Go to '.  anchor('menus/admin','menus/admin').' and find menu id which you want to show the category 
+    under it. This will be used to show category in the top main menu under Other Work. ';
+$lang['preference_label_parentid_other_illust'] = "Parent ID in Category of Other Illustrations";
+$lang['preference_desc_parentid_other_illust'] = 'Go to '. anchor('category/admin','category/admin').'category/admin and find id for the Other Illustrations. This will be used in the backend
+     submenu and filter for the Other Illustration page.';
+$lang['preference_label_lilly_fairies_submenu_id'] = "Lilly Fairies Submenu ID";
+$lang['preference_desc_lilly_fairies_submenu_id'] = 'Go to '.anchor('lilly_fairies_menus/admin','lilly_fairies_menus/admin').' and find the menu ID which you want to show for the Lilly Fairies.';
+$lang['preference_label_quicksand_colorbox_cat_id'] = "Quicksand Colorbox Category ID";
+$lang['preference_desc_quicksand_colorbox_cat_id'] = 'Go to '.anchor('category/admin','category/admin').' and find the category ID which you want to use Quicksand filter and Colorbox Lightbox.';
 
 
 

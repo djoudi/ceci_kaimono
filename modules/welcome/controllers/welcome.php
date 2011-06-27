@@ -112,12 +112,12 @@ class Welcome extends Public_Controller {
     $data['module'] = $this->module;
     $this->load->view($this->_container,$data);
      
-  }
-
-  
-	
+  }	
 	
     function cat($id){
+        if($id == 17){//use $this->preference->item('lilly_fairies_cat_id');
+            redirect('lilly_fairies/index','refresh');
+        }
         $module ='category';
         $cat = $this->MKaimonokago->getinfo($module,$id);
         //$cat = $this->MCats->getCategory($id);
@@ -135,17 +135,30 @@ class Welcome extends Public_Controller {
                 /**
           * If a parent id is 0, it must be a root category, so show children/sub-categories
           */
-                $data['listing'] = $this->MCats->getSubCategories($id);
+                $data['items'] = $this->MCats->getSubCategories($id);
                 /**
          * this will receive a series of array with id, name, shortdesc and thumbnail
                  * and store them in listing. Array ([0]=>array([id]=>14 [name]=>long-sleeve...))
          */
                 $data['level'] = 1;
         }else{
+             if($this->uri->segment(3)==$this->preference->item('quicksand_colorbox_cat_id')){
+                $parentid_other_illust = $this->preference->item('parentid_other_illust');
+                $otherillust_categories = $this->MCats->getSubCategories($parentid_other_illust);
+                 $data['illust_categories']=$otherillust_categories;
+                 
+                $feature='quicksand';
+                $otherillust_categories = $this->MProducts->getFrontFeature($feature);
+                $data['items']=$otherillust_categories;
+                 
+             }  else {
                 // otherwise, it must be a category, so let's show products
-                $data['listing'] = $this->MProducts->getProductsByCategory($id);
-                // this will receive a series of product with array.id,name,shortdesc,thumbnail
-                $data['level'] = 2;
+                $data['items'] = $this->MProducts->getProductsByCategory($id);
+             }
+                 
+
+            // this will receive a series of product with array.id,name,shortdesc,thumbnail
+            $data['level'] = 2;
         }
         $data['category'] = $cat;
         $data['page'] = $this->config->item('backendpro_template_public') . 'category';
@@ -201,6 +214,8 @@ class Welcome extends Public_Controller {
                     redirect($this->module.'/checkout','refresh');
         //}elseif($path =='error'){
                     //redirect($this->module.'/error','refresh');
+            }elseif($path =='patterns'){// can be used cat but it is ok for now
+                    redirect($this->module.'/patterns','refresh');
             }else{
 
         // if session lang is set then pull that language contetnt
@@ -239,6 +254,9 @@ class Welcome extends Public_Controller {
 	$data['question']= $this->security_question;
         $data['security_method']= $this->security_method;
         $data['title'] = $this->preference->item('site_name').": "."Contact us";
+        $path='contact_us';
+        $page = $this->MPages->getPagePathLang($path);
+        $data['pagecontent']=$page;
         $data['cap_img'] = $this->_generate_captcha();	
         $data['page'] = $this->config->item('backendpro_template_public') . 'contact';
         $data['header'] = "Contact us";
@@ -288,11 +306,11 @@ class Welcome extends Public_Controller {
         
         $this->validation->set_rules($rules);
 
-        $fields['name']	= lang('general_name');
-        $fields['email']	= lang('webshop_email');
-        $fields['message']	= lang('message_message');
+        $fields['name']                         = lang('general_name');
+        $fields['email']                        = lang('webshop_email');
+        $fields['message']                      = lang('message_message');
         $fields['recaptcha_response_field']	= 'Recaptcha';
-        $fields['write_ans']        = lang('webshop_security_question');
+        $fields['write_ans']                    = lang('webshop_security_question');
         $this->validation->set_fields($fields);
     /**
          * form_validation, next version of Bep will update to form_validation
@@ -321,7 +339,7 @@ class Welcome extends Public_Controller {
                 $this->load->library('email');
                 $this->email->from($email.$name);
                 $this->email->to($myemail);
-                $this->email->subject(lang('webshop_message_subject'));
+                $this->email->subject(sprintf(lang('webshop_message_subject'),$this->preference->item('site_name')));
                 $this->email->message(lang('webshop_message_sender').
                 $name."\r\n".lang('webshop_message_sender_email').": ".
                 $email. "\r\n".lang('webshop_message_message').": " . $message);
@@ -679,20 +697,41 @@ class Welcome extends Public_Controller {
 	$this->load->view($this->_container,$data);
 			
   }
+ 
+  
+    function patterns(){
+	$data['title'] = $this->preference->item('site_name').": ". "Patterns";
+        // get cat info. this case is patterns
+        $module ='category';
+        // find id of patterns
+        $this->load->model('MCecilie');
+        $table ='omc_category';
+        $find = 'id';
+        $field = 'name';
+        $search = 'Patterns';
+        $pattern = $this->MCecilie->finditem($table,$find,$field,$search);
+        $id = $pattern['id'];
+        $cat = $this->MKaimonokago->getinfo($module,$id);
+        if (!count($cat)){
+                // if there is no such a category id, then redirect.
+                redirect( $this->module.'/index','refresh');
+        }
+        $data['title'] = $this->preference->item('site_name').": ". $cat['name'];
+        $data['category'] = $cat;
 
-	
-  
-  
-  
-    function gallery($id){
-	$data['title'] = $this->preference->item('site_name').": ". "Gallery " . $id;
-	$data['products'] = $this->MProducts->getGallery($id);
+        
+        //$data['patterns']= $this->MCat
+	//$data['items'] = $this->MProducts->getPatterns();// this should be better. Use parameter to find patters in name
+        $search = $id;
+        $data['items'] = $this->MProducts->getProductsByCategory($id);
 	// getGalleryone returns id, name shortdesc thumbnail image class grouping category
 	$data['main'] = 'gallery';// this is using views/galleryone.php etc
-	$data['galleriid']=$id; // used for if statement to add top sub-category 
-        $data['header'] ="Gallery";
-	$this->load->vars($data);
-	$this->load->view('webshop/template'); 
+	//$data['galleriid']=$id; // used for if statement to add top sub-category 
+        $data['title'] = $this->preference->item('site_name').": ". $cat['name'];
+        $data['header'] ="Patterns";
+        $data['page'] = $this->config->item('backendpro_template_public') . 'category';
+	$data['module'] = $this->module;
+	$this->load->view($this->_container,$data);
     }
   
   

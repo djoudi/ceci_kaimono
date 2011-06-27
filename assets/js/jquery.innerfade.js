@@ -130,5 +130,5 @@ function removeFilter(element) {
 
 // for Kaimono kago
 $(document).ready(function(){
-	$('div#slideshow').innerfade({speed:1600,timeout:5000,type:'sequence',containerheight:'200px'})
+	$('div#slideshow').innerfade({speed:1600,timeout:5000,type:'sequence',containerheight:'356px'})
 	});

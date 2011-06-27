@@ -52,6 +52,7 @@ class Settings extends Admin_Controller
 		'slideshow'     => array('name'=> $this->lang->line('preference_frontpage_slideshow_settings'), 'fields'=>'webshop_slideshow,slideshow_two'),
 		'analytics'     => array('name'=> $this->lang->line('preference_google_analytics_settings'), 'fields'=>'ga_tracking,ga_profile, ga_email,ga_password'),
                 'rss_feed'     => array('name'=> $this->lang->line('preference_rss_feeds_settings'), 'fields'=>'dashboard_rss,dashboard_rss_count'),
+                'cecilieokada'     => array('name'=> 'cecileiokada.com Settings', 'fields'=>'category_menu_id,parentid_other_illust,lilly_fairies_submenu_id,quicksand_colorbox_cat_id'),
 
                 );
 
@@ -130,7 +131,13 @@ class Settings extends Admin_Controller
                  // RSS feeds
                 $config['field']['dashboard_rss'] = array('rules'=>'trim');
                 $config['field']['dashboard_rss_count'] = array('rules'=>'trim|numeric');
-
+                
+                // cecilieokada.com
+                $config['field']['category_menu_id'] = array('rules'=>'trim|numeric');
+                $config['field']['parentid_other_illust'] = array('rules'=>'trim|numeric');
+                $config['field']['lilly_fairies_submenu_id'] = array('rules'=>'trim|numeric');
+                $config['field']['quicksand_colorbox_cat_id'] = array('rules'=>'trim|numeric');
+                
 		// Display the form
 		$this->load->module_library('preferences','preference_form');
 		$this->preference_form->initalize($config);

@@ -29,30 +29,9 @@ class MKaimonokago extends Base_model{
         return $data;
     }
 
-
-
-/**
- * Used in playroom/controller/admin/index
- * @param string $module
- * @param array $fields
- * @param array $orderby
- * @return array
- */
-    function getAll($module,$fields,$orderby,$lang_id=NULL){
-        $string= '';
+    function getAllbyField($module, $field,$orderby){
         $module_table = 'omc_'.$module;
-        $data = array();
-        if(is_array($fields)){
-            foreach ($fields as $field){
-            $field = $module_table.".".$field;
-            $string .= ",$field";
-            }
-        }  else {
-
-        }
-        
-        $string =substr($string,1); // remove leading ","
-        $this->db->select("$string,omc_languages.langname");
+        $this->db->select($field);
         /*
         $this->db->select("$module_table.id, $module_table.name,$module_table.parentid,$module_table.status,$module_table.table_id,$module_table.lang_id
          ,omc_languages.langname");
@@ -65,11 +44,57 @@ class MKaimonokago extends Base_model{
          }else{
              $this->db->order_by("$orderby asc");
          }
-         if(isset($lang_id)){
-             $this->db->where('lang_id',$lang_id);
+         $Q = $this->db->get($module_table);
+	     if ($Q->num_rows() > 0){
+	       	foreach ($Q->result_array() as $row){
+	         	$data[]= $row;
+	       	}
+	    }
+	    $Q->free_result();
+	    return $data;
+    }
+
+/**
+ * Used in playroom/controller/admin/index
+ * @param string $module
+ * @param array $fields
+ * @param array $orderby
+ * @return array
+ */
+    function getAll($module,$fields,$orderby,$lang_id=NULL){
+        if ($lang_id ===NULL){
+            $lang_id = 0;
+        }
+        $string= '';
+        $module_table = 'omc_'.$module;
+        $data = array();
+        if(is_array($fields)){
+            foreach ($fields as $field){
+            $field = $module_table.".".$field;
+            $string .= ",$field";
+            }
+        }  else {
+
+        }      
+        $string =substr($string,1); // remove leading ","
+        /*
+        $this->db->select("$module_table.id, $module_table.name,$module_table.parentid,$module_table.status,$module_table.table_id,$module_table.lang_id
+         ,omc_languages.langname");
+         *
+         */
+        if(is_array($orderby)){
+             foreach ($orderby as $order){
+                 $this->db->order_by("$order asc");
+             }
+         }else{
+             $this->db->order_by("$orderby asc");
          }
-         $this->db->join('omc_languages', $module_table.'.lang_id = omc_languages.id','left');
-	     $Q = $this->db->get($module_table);
+        // if(!empty($lang_id)){
+             $this->db->select("$string,omc_languages.langname");
+             $this->db->where('lang_id',$lang_id);
+             $this->db->join('omc_languages', $module_table.'.lang_id = omc_languages.id','left');
+         //}
+         $Q = $this->db->get($module_table);
 	     if ($Q->num_rows() > 0){
 	       	foreach ($Q->result_array() as $row){
 	         	$data[] = $row;

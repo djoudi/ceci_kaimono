@@ -12,4 +12,4 @@
             $this->load->view($page);
         }}
     ?>
-</div>
+</div><!-- end of content -->

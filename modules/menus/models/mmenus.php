@@ -10,24 +10,28 @@ class MMenus extends Model{
           parent::Model();
       }
 
-  function generateTree(&$tree, $parentid = 0) {
-         $this->db->select('id,name,shortdesc,status,parentid,order,lang_id');
-         $this->db->where ('parentid',$parentid);
-		 $this->db->where ('status','active');
-         $this->db->order_by('order asc, parentid asc'); 
-         $res = $this->db->get('omc_menus');
-         if ($res->num_rows() > 0) {
-             foreach ($res->result_array() as $r) {
-                
-				// push found result onto existing tree
-                $tree[$r['id']] = $r;
-                // create placeholder for children
-                $tree[$r['id']]['children'] = array();
-                // find any children of currently found child
-                $this->generateTree($tree[$r['id']]['children'],$r['id']);
-             }
+    function generateTree(&$tree, $parentid = 0,$table=NULL) {
+        $this->db->select('id,name,shortdesc,status,parentid,order,lang_id');
+        $this->db->where ('parentid',$parentid);
+        $this->db->where ('status','active');
+        $this->db->order_by('order asc, parentid asc'); 
+        if(!empty($table)){
+            $res = $this->db->get($table);
+        }else{
+            $res = $this->db->get('omc_menus');
+        }
+        
+        if ($res->num_rows() > 0) {
+            foreach ($res->result_array() as $r) {
+            // push found result onto existing tree
+            $tree[$r['id']] = $r;
+            // create placeholder for children
+            $tree[$r['id']]['children'] = array();
+            // find any children of currently found child
+            $this->generateTree($tree[$r['id']]['children'],$r['id'],$table);
          }
-     }
+        }
+    }
 
 
      function generateTreewithLang(&$tree, $parentid = 0,$lang_id) {
@@ -75,11 +79,16 @@ class MMenus extends Model{
          }
      }
 
-  function generateallTree(&$tree, $parentid = 0) {
+  function generateallTree(&$tree, $parentid = 0,$table=NULL) {
          //$this->db->select('id,name,shortdesc,status,parentid,page_uri,order');
          $this->db->where ('parentid',$parentid);
          $this->db->order_by('order asc, parentid asc, page_uri_id asc');
-         $res = $this->db->get('omc_menus');
+         if(!empty($table)){
+             $res = $this->db->get($table);
+         }  else {
+             $res = $this->db->get('omc_menus');
+         }
+         
          if ($res->num_rows() > 0) {
              foreach ($res->result_array() as $r) {
                 
@@ -88,7 +97,7 @@ class MMenus extends Model{
                 // create placeholder for children
                 $tree[$r['id']]['children'] = array();
                 // find any children of currently found child
-                $this->generateallTree($tree[$r['id']]['children'],$r['id']);
+                $this->generateallTree($tree[$r['id']]['children'],$r['id'],$table);
              }
          }
      }
@@ -141,11 +150,15 @@ class MMenus extends Model{
 
 
 
-  function getMenu($id){
+  function getMenu($id,$table=NULL){
       $data = array();
       $options = array('id' =>id_clean($id));
      // $this->db->join('omc_pages', 'omc_pages.id = omc_menus.page_uri_id');
-      $Q = $this->db->get_where('omc_menus',$options,1);
+      if(!empty ($table)){
+          $Q = $this->db->get_where($table,$options,1);
+      }  else {
+          $Q = $this->db->get_where('omc_menus',$options,1);
+      }
       if ($Q->num_rows() > 0){
         $data = $Q->row_array();
       }
@@ -154,14 +167,25 @@ class MMenus extends Model{
       return $data;    
    }
 
-    function getMenuwithPage($mid){
+    function getMenuwithPage($mid,$menu_table=NULL,$page_table = NULL){
       $data = array();
-      $this->db->select('omc_menus.id AS menusid,omc_menus.name,omc_menus.shortdesc,omc_menus.status
+      if(!empty ($menu_table)){
+          $this->db->select("$menu_table.id AS menusid,$menu_table.name,$menu_table.shortdesc,$menu_table.status
+          ,$menu_table.parentid,$menu_table.order,$menu_table.lang_id,$menu_table.page_uri_id
+          , $page_table.id AS pagesid, $page_table.name,$page_table.path");
+          $options = array("$menu_table.id" =>id_clean($mid));
+          $this->db->join("$page_table", "$page_table.id = $menu_table.page_uri_id",'right');
+          $Q = $this->db->get_where($menu_table,$options,1);
+      }else{
+          $this->db->select('omc_menus.id AS menusid,omc_menus.name,omc_menus.shortdesc,omc_menus.status
           ,omc_menus.parentid,omc_menus.order,omc_menus.lang_id,omc_menus.page_uri_id
           , omc_pages.id AS pagesid, omc_pages.name,omc_pages.path');
-      $options = array('omc_menus.id' =>id_clean($mid));
-      $this->db->join("omc_pages", "omc_pages.id = omc_menus.page_uri_id",'right');
-      $Q = $this->db->get_where('omc_menus',$options,1);
+          $options = array('omc_menus.id' =>id_clean($mid));
+          $this->db->join("omc_pages", "omc_pages.id = omc_menus.page_uri_id",'right');
+          $Q = $this->db->get_where('omc_menus',$options,1);
+      }
+     
+      
       if ($Q->num_rows() > 0){
         $data = $Q->row_array();
       }
@@ -197,10 +221,15 @@ class MMenus extends Model{
    }
 
 
-    function getAllMenusDisplayByLang($lang_id){
+    function getAllMenusDisplayByLang($lang_id,$table=NULL){
         $data = array();
       // $data[0] = 'root';
-       $Q = $this->db->get_where('omc_menus',array('lang_id'=>$lang_id));
+        if(isset($table)){
+            $Q = $this->db->get_where($table,array('lang_id'=>$lang_id));
+        }  else {
+            $Q = $this->db->get_where('omc_menus',array('lang_id'=>$lang_id));
+        }
+       
        if ($Q->num_rows() > 0){
          foreach ($Q->result_array() as $row){
            $data[$row['id']] = $row['name'];
@@ -346,10 +375,15 @@ class MMenus extends Model{
     * 
     */
    
-   function deleteMenu($id){
+   function deleteMenu($id,$table=NULL){
       // $data = array('status' => 'inactive');
       $this->db->where('id', id_clean($id));
-      $this->db->delete('omc_menus');
+      if(!empty ($table)){
+          $this->db->delete($table);
+      }  else {
+          $this->db->delete('omc_menus');
+      }
+      
    }
    
 	 function changeMenuStatus($id){
@@ -379,11 +413,15 @@ class MMenus extends Model{
       return $this->dbutil->csv_from_result($Q,",","\n");
    }
    
-   function checkMenuOrphans($id){
+   function checkMenuOrphans($id, $table=NULL){
       $data = array();
       $this->db->select('id,name');
       $this->db->where('parentid',id_clean($id));
-      $Q = $this->db->get('omc_menus');
+      if(!empty ($table)){
+          $Q = $this->db->get($table);
+      }  else {
+          $Q = $this->db->get('omc_menus');
+      }
       if ($Q->num_rows() > 0){
          foreach ($Q->result_array() as $row){
            $data[$row['id']] = $row['name'];

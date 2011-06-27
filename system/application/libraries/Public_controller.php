@@ -139,7 +139,8 @@ class Public_Controller extends Site_Controller
         */
         // $parentid is depends on lang_id
         // find parentid from menu.id where lang_id=$lang_id and where menu.parentid=0
-        $parentid = $this->MMenus->getrootMenusByLang($this->lang_id);
+        //$parentid = $this->MMenus->getrootMenusByLang($this->lang_id); // this is for multi-lang
+        $parentid = $this->preference->item('categories_parent_id');// this is not for multi-lang. need to modify in future for multi-lang
         if($parentid){
             $parentid = $parentid;
         }else{
@@ -164,7 +165,8 @@ class Public_Controller extends Site_Controller
        
         $this->data['parent']= $cat_parentid;
         //$parentid = $this->preference->item('categories_parent_id');
-        $this->data['navlist'] = $this->MCats->getCatNavbyLang($cat_parentid,$this->lang_id);
+        $order='order';
+        $this->data['navlist'] = $this->MCats->getCatNavbyLang($cat_parentid,$order,$this->lang_id);
         // $this->data['navlisttest'] = $this->MCats->getCatNavbyLangtest($parentid,$this->lang_id);
         /*
         $mostsold= "most sold";

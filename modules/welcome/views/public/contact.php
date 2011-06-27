@@ -1,4 +1,11 @@
-<div id="content">
+<div id="catdesc">
+    <div id="header">
+        <h1><?php echo anchor(site_url(),"<img src=\"assets/images/cecilie/logo.png\" />"); 
+       // echo "<img src=\"assets/images/cecilie/logo.png\" />";
+            echo "<span class=\"negindent\">". $this->preference->item('site_name')."</span>";
+            ?>
+   </h1>
+    </div>
     <div id="omossleft">
         <div id="logo">
         </div>
@@ -10,6 +17,8 @@
                 echo $this->session->flashdata('subscribe_msg');
                 echo "</div>";
         }
+        echo $pagecontent['content'];
+//        print_r ($pagecontent);
         ?>
 	
         <div id="contactform">
