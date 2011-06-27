@@ -154,10 +154,15 @@ function getCategory($id){
 
 
 
- function getCategoriesDropDown(){
+ function getCategoriesDropDown($parentid=NULL){
      $data = array();
      $this->db->select('id,name');
-     $this->db->where('parentid !=',0);
+     
+     if(!empty($parentid)){
+         $this->db->where('parentid', $parentid);
+     }else{
+         $this->db->where('parentid !=',0);
+     }
      $Q = $this->db->get('omc_category');
      if ($Q->num_rows() > 0){
        foreach ($Q->result_array() as $row){

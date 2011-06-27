@@ -16,7 +16,7 @@ echo "<div id='".$content_id."'>";
 <?php
 echo "<div id='lillycont'>";
 
-echo "<img id='lilly_logo' src=\"assets/images/lilly_logo.png\" />";
+echo anchor (site_url()."/lilly_fairies/index", "<img id='lilly_logo' src=\"assets/images/lilly_logo.png\" />");
 $this->load->view( 'public/submenu');
 
 

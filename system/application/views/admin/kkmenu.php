@@ -2,7 +2,11 @@
           // Load modules/centres/models/MCentres
           // Loading it in Admin_controller
           // $this->load->module_model('centres','MCentres');
-          $categories = $this->MCats->getCategoriesDropDown();
+          $parentid_other_work = $this->preference->item('lilly_fairies_submenu_id');
+          $otherwork_categories = $this->MCats->getCategoriesDropDown($parentid_other_work);
+          $parentid_other_illust = $this->preference->item('parentid_other_illust');
+          //$parentid_other_illust = 27;
+          $otherillust_categories = $this->MCats->getCategoriesDropDown($parentid_other_illust);
 ?>
 
 <li id="menu_bep_general"><span class="icon_general"><?php print $this->lang->line('backendpro_general')?></span>
@@ -25,7 +29,20 @@
     <ul>       
         <?php if(check('Category',NULL,FALSE)):?>
         <?php
-        foreach ($categories as $key => $list){
+        foreach ($otherwork_categories as $key => $list){// see the top this page for $otherwork_categories
+            echo "<li>";
+            echo anchor("products/manage/index/$key",$list,array('class'=>'icon_application_form_magnify'));
+            echo "</li>";
+        }
+        ?>
+        <?php echo "\n"; endif;?> 
+    </ul>
+</li>
+<li id="other_illust"><span class="icon_award_star_gold_2"><?php print 'Other Illustrations'?></span>
+    <ul>       
+        <?php if(check('Category',NULL,FALSE)):?>
+        <?php
+        foreach ($otherillust_categories as $key => $list){
             echo "<li>";
             echo anchor("products/manage/index/$key",$list,array('class'=>'icon_application_form_magnify'));
             echo "</li>";

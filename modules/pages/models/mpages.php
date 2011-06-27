@@ -183,7 +183,7 @@ class MPages extends Model{
 
 
      
-     function getIdwithnoneLang($lang_id, $table){
+     function getIdwithnoneLang($lang_id, $table=NULL){
 	     $data[0] = 'none';
              if(!empty($table)){
                  $Q = $this->db->get_where($table, array('lang_id'=>$lang_id));

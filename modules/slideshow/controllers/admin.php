@@ -125,37 +125,39 @@ class Admin extends Shop_Admin_Controller {
     function createxml(){
         $fields = 'name';
         $orderby = 'slide_order';
-        $images = $this->MKaimonokago->getAll($this->module,$fields,$orderby,$lang_id=NULL);
+        
+        $images = $this->MKaimonokago->getAll($this->module,$fields,$orderby);
         //$images = $images['name'];
         //sort($images);// sort alphabetically
         $str = <<<EOD
-        <?xml version="1.0" encoding="utf-8" ?>
-        <cu3er>
+<?xml version="1.0" encoding="utf-8" ?>
+    <cu3er>
 	<settings>
             <auto_play>
-            <defaults time="2" symbol="circular"/>
-            <tweenIn x="395" y="45" width="30" height="30" tint="0xFFFFFF" alpha="0.5"/>
-            <tweenOver alpha="1"/>
+                <defaults time="2" symbol="circular"/>
+                <tweenIn x="395" y="45" width="30" height="30" tint="0xFFFFFF" alpha="0.5"/>
+                <tweenOver alpha="1"/>
             </auto_play>
-    	<prev_button>
-            <defaults round_corners="5,5,5,5"/>
-            <tweenOver time="2" tint="0xFFFFFF" scaleX="1.1" scaleY="1.1"/>
-            <tweenOut tint="0x000000" />
-        </prev_button>
+            
+            <prev_button>
+                <defaults round_corners="5,5,5,5"/>
+                <tweenOver time="2" tint="0xFFFFFF" scaleX="1.1" scaleY="1.1"/>
+                <tweenOut tint="0x000000" />
+            </prev_button>
 
-    	<prev_symbol>
-            <tweenOver tint="0x000000" />
-        </prev_symbol>
+            <prev_symbol>
+                <tweenOver tint="0x000000" />
+            </prev_symbol>
 
-    	<next_button>
-            <defaults round_corners="5,5,5,5"/>
-            <tweenOver tint="0xFFFFFF"  scaleX="1.1" scaleY="1.1"/>
-            <tweenOut tint="0x000000" />
-        </next_button>
+            <next_button>
+                <defaults round_corners="5,5,5,5"/>
+                <tweenOver tint="0xFFFFFF"  scaleX="1.1" scaleY="1.1"/>
+                <tweenOut tint="0x000000" />
+            </next_button>
 
-    	<next_symbol>
-            <tweenOver tint="0x000000" />
-        </next_symbol>
+            <next_symbol>
+                <tweenOver tint="0x000000" />
+            </next_symbol>
 
 	</settings>
 

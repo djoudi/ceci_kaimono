@@ -21,18 +21,24 @@ if(count($this->data['mainnav'])){
         // if segment 2 is cat(category) and $menu['id']==$this->preference->item('cateory_menu_id ') should have active
         //OR strtolower($menu['name'])==$method_name part for contact, paaterns etc
         // OR $content_exist part for home
+        // if $beppages, segment(1) is lilly_fairies AND sttolower($menu['name'])=='other work', then otherwork should have active     
         if($beppages=="lilly_fairies"){
-            $activeclass="";
+            if(($menu['id'])==$category_menu_id){
+                $activeclass=" active";
+            }  else {
+                $activeclass="";
+            }
+            
         }elseif($method_name=='cat' AND $menu['id']==$category_menu_id OR $content_exist OR strtolower($menu['name'])==$method_name){
             $activeclass=" active";
-        }  elseif ($method_name=='pages') {// this is needed not to add active to main menu pages/17 when cat/17 is in url 
+        }elseif ($method_name=='pages') {// this is needed not to add active to main menu pages/17 when cat/17 is in url 
             if($menu['id']==$activeid){//second one is for homepage
             $activeclass=" active";
-        }elseif($beppages=="auth"){
-            $activeclass="";
-        }else{
-            $activeclass="";
-        }
+            }elseif($beppages=="auth"){
+                $activeclass="";
+            }else{
+                $activeclass="";
+            }
         }else{
             $activeclass="";
         }

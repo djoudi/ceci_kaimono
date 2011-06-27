@@ -233,7 +233,7 @@ topnav
 }
 
 #nav {
-    width: 690px;
+    width: 700px;
     margin: 0 auto;
     height: 47px;
     list-style-type:none;
@@ -566,3 +566,91 @@ bottom menu
     color: #000;
     display: block;
 }
+
+/********************
+Quicksand
+**************************/
+.splitter {
+    
+    font-size: 12px;
+    text-align: center;
+}
+
+.splitter li, .splitter ul, .splitter ul li a {
+    display: inline;
+    display: inline-block;
+    line-height: 1;
+    padding: 0 5px;
+}
+
+#list{
+    min-height: 800px;
+}
+.splitter ul li a {
+  padding: 5px 8px 6px;
+  color: #070708;
+  text-shadow: rgba(255, 255, 255, 0.1) 0 1px 0;
+  text-decoration: none;
+}
+
+.splitter ul li.selected-0 a,
+.splitter ul li.selected-1 a,
+.splitter ul li.selected-2 a,
+.splitter ul li.selected-3 a,
+.splitter ul li.selected-4 a,
+.splitter ul li.selected-5 a,
+.splitter ul li.selected-6 a,
+.splitter ul li.selected-7 a,
+.splitter ul li.selected-8 a,
+.splitter ul li.selected-9 a{
+  color: #666;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 1px 0;
+}
+
+
+.image-grid {
+  padding-left: 45px;
+  width: 840px;
+}
+
+.image-grid:after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+.image-grid li {
+  width: 118px;
+  margin: 20px 0 0 20px;
+  float: left;
+  text-align: center;
+  font-family: "Helvetica Neue", sans-serif;
+  line-height: 17px;
+  color: #686f74;
+  height: 147px;
+  overflow: hidden;
+}
+
+.image-grid li img,
+.image-grid li strong {
+  display: block;
+}
+
+.image-grid li strong {
+  color: #000;
+}
+
+
+.image-grid li img{
+    padding: 0 0 0 25px;
+}
+
+
+
+
+
+
+
+

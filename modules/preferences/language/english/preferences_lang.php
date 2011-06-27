@@ -97,9 +97,15 @@ $lang['preference_desc_dashboard_rss_count'] = 'How many RSS items would you lik
 
 // cecilieokada.com Settings
 $lang['preference_label_category_menu_id'] = "Category Menu ID";
-$lang['preference_desc_category_menu_id'] = 'Go to menus/admin and find menu id which you want to show the category under it. i.e ID of other work. ';
+$lang['preference_desc_category_menu_id'] = 'Go to '.  anchor('menus/admin','menus/admin').' and find menu id which you want to show the category 
+    under it. This will be used to show category in the top main menu under Other Work. ';
+$lang['preference_label_parentid_other_illust'] = "Parent ID in Category of Other Illustrations";
+$lang['preference_desc_parentid_other_illust'] = 'Go to '. anchor('category/admin','category/admin').'category/admin and find id for the Other Illustrations. This will be used in the backend
+     submenu and filter for the Other Illustration page.';
 $lang['preference_label_lilly_fairies_submenu_id'] = "Lilly Fairies Submenu ID";
-$lang['preference_desc_lilly_fairies_submenu_id'] = 'Go to menus/admin and find menu ID which you want to show for the Lilly Fairies.';
+$lang['preference_desc_lilly_fairies_submenu_id'] = 'Go to '.anchor('lilly_fairies_menus/admin','lilly_fairies_menus/admin').' and find the menu ID which you want to show for the Lilly Fairies.';
+$lang['preference_label_quicksand_colorbox_cat_id'] = "Quicksand Colorbox Category ID";
+$lang['preference_desc_quicksand_colorbox_cat_id'] = 'Go to '.anchor('category/admin','category/admin').' and find the category ID which you want to use Quicksand filter and Colorbox Lightbox.';
 
 
 

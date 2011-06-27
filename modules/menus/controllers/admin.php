@@ -43,7 +43,7 @@ class Admin extends Shop_Admin_Controller {
         $pages =$this->MPages->getIdwithnoneAll();
         $data['pages']=$pages;
         $data['languages'] =$this->MLangs->getLangDropDownWithId();
-        $data['header'] = $this->lang->line('backendpro_access_control');
+        $data['header'] = $this->lang->line('kago_manage'). " ". $this->lang->line('kago_menu');
         $data['page'] = $this->config->item('backendpro_template_admin') . "admin_menu_home";
         $data['module'] = $this->module;
         $this->load->view($this->_container,$data);
@@ -91,7 +91,7 @@ class Admin extends Shop_Admin_Controller {
             flashMsg('success',$this->lang->line('kago_created'));
             redirect($this->module.'/admin/index','refresh');
   	}else{
-            $data['title'] = "Create Menu";
+            $data['header'] =$data['title'] = "Create Menu";
         // need to show only english menus
 	  	//$data['menus'] = $this->MMenus->getAllMenusDisplay();
             $lang_id ='0';
@@ -106,7 +106,7 @@ class Admin extends Shop_Admin_Controller {
             // Set breadcrumb
             $this->bep_site->set_crumb($this->lang->line('kago_create'),$this->module.'/admin/create');
 
-            $data['header'] = $this->lang->line('backendpro_access_control');
+           // $data['header'] = "Create Menu";
             $data['cancel_link']= $this->module."/admin/index/";
             $data['page'] = $this->config->item('backendpro_template_admin') . "admin_menu_create";
             $data['module'] = $this->module;
@@ -131,7 +131,7 @@ class Admin extends Shop_Admin_Controller {
 	// if segment 6 is 0 then it is English
         // for English, it has structure of menus/admin/edit/' .  $row['id'] .'/'.$row['page_uri_id'].'/'.$row['lang_id']
         // for other language it has structure of menus/admin/edit/' .  $row['menu_id'] .'/'.$row['page_uri_id'].'/'.$row['lang_id'].'/'.$row['id']
-        $data['title'] = $this->lang->line('kago_edit')." ".$this->lang->line('kago_menu');
+        $data['header'] = $data['title'] = $this->lang->line('kago_edit')." ".$this->lang->line('kago_menu');
         // pull all the languages
         $data['languages'] =$this->MLangs->getLangDropDownWithId();
         // get all the translated languages
@@ -179,7 +179,7 @@ class Admin extends Shop_Admin_Controller {
 		}
          * 
          */
-        $data['header'] = $this->lang->line('backendpro_access_control');
+        //$data['header'] = $this->lang->line('backendpro_access_control');
 
         // Set breadcrumb
         $this->bep_site->set_crumb($this->lang->line('kago_edit'),$this->module.'/admin/edit');

@@ -142,10 +142,23 @@ class Welcome extends Public_Controller {
          */
                 $data['level'] = 1;
         }else{
+             if($this->uri->segment(3)==$this->preference->item('quicksand_colorbox_cat_id')){
+                $parentid_other_illust = $this->preference->item('parentid_other_illust');
+                $otherillust_categories = $this->MCats->getSubCategories($parentid_other_illust);
+                 $data['illust_categories']=$otherillust_categories;
+                 
+                $feature='quicksand';
+                $otherillust_categories = $this->MProducts->getFrontFeature($feature);
+                $data['items']=$otherillust_categories;
+                 
+             }  else {
                 // otherwise, it must be a category, so let's show products
                 $data['items'] = $this->MProducts->getProductsByCategory($id);
-                // this will receive a series of product with array.id,name,shortdesc,thumbnail
-                $data['level'] = 2;
+             }
+                 
+
+            // this will receive a series of product with array.id,name,shortdesc,thumbnail
+            $data['level'] = 2;
         }
         $data['category'] = $cat;
         $data['page'] = $this->config->item('backendpro_template_public') . 'category';

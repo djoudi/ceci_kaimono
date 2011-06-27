@@ -185,7 +185,7 @@ class MProducts extends Model{
          $data = array();
          $this->db->where('featured',$feature);
          $this->db->where('status', 'active');
-             $this->db->LIMIT(9);
+             //$this->db->LIMIT(9);
          $this->db->order_by('name','random');
          $Q = $this->db->get('omc_products');
          if ($Q->num_rows() > 0){

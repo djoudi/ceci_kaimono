@@ -78,7 +78,7 @@ if (count($pages)){
             // single language so display only lang_id ==0
             if($list['lang_id']==0){     
                 echo "<tr ";
-        if($list['langname']){
+        if(!empty($list['langname'])){
             echo "class=\"dentme\"";
         }
         echo "valign='top'>\n";
