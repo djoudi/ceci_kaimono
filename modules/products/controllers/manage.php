@@ -18,7 +18,8 @@ private $module;
         // Check for access permission
         check('Products');
         $this->load->module_model('Category','MCats');
-        $this->load->module_model('Products','MProducts');
+        //$this->load->module_model('Products','MProducts');
+        $this->load->model('MProducts');
         $this->module=basename(dirname(dirname(__FILE__)));
         //$this->module='category';
         // Set breadcrumb

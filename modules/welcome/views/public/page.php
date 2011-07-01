@@ -34,8 +34,7 @@ if ($pos !== false) {
      echo "<div id=\"aboutpage\">";
      echo "<img id='cecilie' src='". base_url()."assets/images/cecilie/cecilie_okada.png' />";
      echo "<img id='lima' src='". base_url()."assets/images/cecilie/lima_logo.png' />";
-     echo "<div id='amg'><img src='". base_url()."assets/images/cecilie/amg.png' />Authorised Member
-of GRAFILL (Norway)</div>";
+     echo "<div id='amg'><img src='". base_url()."assets/images/cecilie/amg.png' /></div>";
 } else {
      echo "<div id=\"catdesc\">";
 }

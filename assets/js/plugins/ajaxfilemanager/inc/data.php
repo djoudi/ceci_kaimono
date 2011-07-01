@@ -1,8 +1,8 @@
 <pre>Array
 (
-    [currentFolderPath] => ../../../../assets/images/
-    [new_folder] => mayancalendar
+    [currentFolderPath] => ../../../../assets/images/patterns/
+    [new_folder] => thumbs
 )
 </pre>
 
-17/Jun/2011 16:08:49
+28/Jun/2011 12:02:14

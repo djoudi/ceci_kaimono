@@ -107,6 +107,11 @@ $lang['preference_desc_lilly_fairies_submenu_id'] = 'Go to '.anchor('lilly_fairi
 $lang['preference_label_quicksand_colorbox_cat_id'] = "Quicksand Colorbox Category ID";
 $lang['preference_desc_quicksand_colorbox_cat_id'] = 'Go to '.anchor('category/admin','category/admin').' and find the category ID which you want to use Quicksand filter and Colorbox Lightbox.';
 
+// Sharethis
+$lang['preference_label_sharethis_direction'] = "Sharethis Direction";
+$lang['preference_desc_sharethis_direction'] = 'vertical or horizontal';
+$lang['preference_label_sharethis_services'] = "Sharethis Services";
+$lang['preference_desc_sharethis_services'] = 'Type facebook, twitter, yahoo, gbuzz, email, sharethis, linkedin, diigo, blogger. Separate them with commas.';
 
 
 /**

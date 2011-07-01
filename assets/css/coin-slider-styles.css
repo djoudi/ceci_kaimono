@@ -15,3 +15,7 @@
 
 .cs-prev, 
 .cs-next { background-color: #000000; color: #FFFFFF; padding: 0px 10px; }
+
+#coin-slider-slideshow a:hover{
+    color: #ffffff;
+}

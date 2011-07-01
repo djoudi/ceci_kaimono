@@ -53,7 +53,7 @@ class Settings extends Admin_Controller
 		'analytics'     => array('name'=> $this->lang->line('preference_google_analytics_settings'), 'fields'=>'ga_tracking,ga_profile, ga_email,ga_password'),
                 'rss_feed'     => array('name'=> $this->lang->line('preference_rss_feeds_settings'), 'fields'=>'dashboard_rss,dashboard_rss_count'),
                 'cecilieokada'     => array('name'=> 'cecileiokada.com Settings', 'fields'=>'category_menu_id,parentid_other_illust,lilly_fairies_submenu_id,quicksand_colorbox_cat_id'),
-
+                'sharethis'     => array('name'=> 'Sharethis Settings', 'fields'=>'sharethis_pub_key,sharethis_direction,sharethis_size,sharethis_services'),
                 );
 
 		// Setup custom field options
@@ -137,6 +137,14 @@ class Settings extends Admin_Controller
                 $config['field']['parentid_other_illust'] = array('rules'=>'trim|numeric');
                 $config['field']['lilly_fairies_submenu_id'] = array('rules'=>'trim|numeric');
                 $config['field']['quicksand_colorbox_cat_id'] = array('rules'=>'trim|numeric');
+                
+                // sharethis
+                $config['field']['sharethis_pub_key'] = array('rules'=>'trim');
+                $config['field']['sharethis_direction'] = array('type'=>'dropdown','params'=>array('options'=>array('vertical'=>'Vertical','horizontal'=>'Horizontal')));;
+                $config['field']['sharethis_size'] = array('type'=>'dropdown','params'=>array('options'=>array(''=>'Small','large'=>'Large')));;
+                $config['field']['sharethis_services']= array('rules'=>'trim');
+                
+                
                 
 		// Display the form
 		$this->load->module_library('preferences','preference_form');

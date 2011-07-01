@@ -15,20 +15,21 @@ echo $category['longdesc'] . "\n";
 echo "</div><!-- end of catdesc -->\n";
 if(isset($items)){
     if($this->uri->segment(3)==$this->preference->item('quicksand_colorbox_cat_id')){
-        echo "<ul class='splitter'>\n<li>Filter by type:\n<ul>\n";
-        echo '<li class="segment-0 selected-1"><a href="#" data-value="all">Everything</a></li>';
+        echo "<ul class='splitter'>\n<li><span class='minimal'>Filter by type:</span>\n<ul>\n";
+        echo '<li class="segment-0 selected-1 clean-gray"><a href="#" data-value="all">Everything</a></li>';
         $num = count($illust_categories);
         foreach($illust_categories as $key => $illust_category){
             $key = $key +1;
-            echo "\n<li class='segment-".$key."'><a href='#' data-value='".strtolower($illust_category['name'])."'>"
+            echo "\n<li class='segment-".$key." clean-gray'><a href='#' data-value='".strtolower($illust_category['name'])."'>"
             .$illust_category['name'];
             echo "</a></li>";
         }//end of foreach
         echo "\n</ul>\n</li>\n";
-        echo "<li>Sort by:\n
+        echo "<li><span class='minimal'>Sort by:</span>\n
 	    <ul>\n
-	      <li class=\"segment-1 selected-1\"><a href=\"#\" data-value=\"name\">Name</a></li>\n
-	      <li class=\"segment-2\"><a href=\"#\" data-value=\"desc\">Random</a></li>\n
+                <li class=\"segment-2 selected-1 clean-gray\"><a href=\"#\" data-value=\"desc\">Random</a></li>\n
+	      <li class=\"segment-1 clean-gray\"><a href=\"#\" data-value=\"name\">Name</a></li>\n
+	      
 	    </ul>\n
 	  </li>\n";
         echo "</ul>";
@@ -71,7 +72,7 @@ if(isset($items)){
             echo "<li class=\"".$item['class']."\" >\n<img src=\"". 
             $thumbnail."\" alt=\"".$item['name']. "\" width=\"144\" height=\"207\" />\n";
             echo "<div class=\"productdesc\">\n";
-            echo "<a title=\"".$item['name']."\" rel=\"imagebox\" href=\"".$image."\">\n<span class=\"magnifying\">See more details</span>\n</a><br />\n";
+            echo "<a title=\"".$item['name']." ".$item['longdesc']."\" rel=\"imagebox\" href=\"".$image."\">\n<span class=\"magnifying\">See more details</span>\n</a><br />\n";
             echo "<p>$item[name]</p>\n";
             echo "</div>\n";
             echo "</li>\n\n";	
